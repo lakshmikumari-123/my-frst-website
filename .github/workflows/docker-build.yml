@@ -28,4 +28,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: YOUR_DOCKERHUB_USERNAME/my-devops-portfolio:latest
+          tags: kum6/my-devops-portfolio:latest
