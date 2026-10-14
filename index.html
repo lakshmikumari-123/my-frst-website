@@ -1,13 +1,496 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My DevOps Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DevOps Portfolio | Lakshmi Kumari</title>
+  <meta name="description" content="Lakshmi Kumari's DevOps portfolio showcasing Docker, GitHub Actions, CI/CD, Linux and cloud learning projects.">
+
+  <style>
+    :root {
+      --bg: #080d1a;
+      --surface: #101a2d;
+      --surface-light: #14213a;
+      --text: #f1f5f9;
+      --muted: #a5b4cc;
+      --blue: #60a5fa;
+      --cyan: #67e8f9;
+      --border: #253650;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1080px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(8, 13, 26, 0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .hero {
+      min-height: 570px;
+      display: flex;
+      align-items: center;
+      padding: 90px 0;
+      background:
+        radial-gradient(ellipse at 85% 20%, #12305a 0%, transparent 42%),
+        var(--bg);
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 4.6rem);
+      line-height: 1.12;
+      margin: 18px 0;
+      letter-spacing: -2px;
+    }
+
+    .highlight {
+      color: var(--blue);
+    }
+
+    .hero p {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid var(--blue);
+      transition: 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .about-panel,
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+    }
+
+    .about-panel p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .skills-grid,
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card h3 {
+      color: var(--cyan);
+      font-size: 1.08rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      background: var(--surface-light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      color: #dbeafe;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .project-card .button {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .status {
+      display: inline-block;
+      color: var(--cyan);
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-panel {
+      text-align: center;
+      background:
+        radial-gradient(ellipse at top, #17365d, transparent 75%),
+        var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 45px 24px;
+    }
+
+    .contact-panel p {
+      color: var(--muted);
+      margin: 12px auto 22px;
+      max-width: 600px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 760px) {
+      nav {
+        padding: 15px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 75px 0;
+      }
+
+      section {
+        padding: 58px 0;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Welcome to My DevOps Portfolio!</h1>
-    <p>This website is packaged using Docker.</p>
-    <p>My learning journey: Linux, Git, Docker and GitHub Actions.</p>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a class="logo" href="#home">LK.dev</a>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <span class="eyebrow">DevOps Learner &amp; Software Engineer</span>
+
+        <h1>
+          Hi, I'm Lakshmi Kumari.<br>
+          I build and learn<br>
+          <span class="highlight">with DevOps.</span>
+        </h1>
+
+        <p>
+          I'm a Computer Science graduate developing my skills in
+          Docker, GitHub Actions, CI/CD, Linux and cloud technologies.
+          I enjoy learning how applications are built, packaged and
+          delivered through automation.
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="#projects">Explore My Projects</a>
+          <a class="button" href="https://github.com/lakshmikumari-123"
+             target="_blank" rel="noopener noreferrer">
+            Visit GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">A little about me</span>
+          <h2>About Me</h2>
+        </div>
+
+        <div class="about-panel">
+          <p>
+            I'm Lakshmi Kumari, a Computer Science graduate interested
+            in DevOps and software delivery automation.
+          </p>
+          <p>
+            I have created a portfolio website, packaged it using Docker,
+            and configured GitHub Actions to build and push a Docker
+            image to Docker Hub. I'm continuing to strengthen my skills
+            through practical projects.
+          </p>
+          <p>
+            My goal is to grow as a technology professional by learning
+            deployment workflows, troubleshooting, cloud infrastructure
+            and monitoring.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Tools I'm learning</span>
+          <h2>Skills &amp; Technologies</h2>
+          <p>Technologies I've practised or am currently learning.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="card">
+            <h3>Containers</h3>
+            <p>Packaging a website into a container image and running it locally.</p>
+            <div class="tags">
+              <span class="tag">Docker</span>
+              <span class="tag">Docker Hub</span>
+              <span class="tag">Nginx</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>CI/CD &amp; Version Control</h3>
+            <p>Using GitHub to manage code and automate image builds.</p>
+            <div class="tags">
+              <span class="tag">Git</span>
+              <span class="tag">GitHub</span>
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">CI/CD</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Foundations</h3>
+            <p>Building foundational knowledge for application delivery and operations.</p>
+            <div class="tags">
+              <span class="tag">Linux</span>
+              <span class="tag">Networking</span>
+              <span class="tag">Cloud Fundamentals</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">What I've built</span>
+          <h2>Featured Projects</h2>
+          <p>Practical work from my DevOps learning journey.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="card project-card">
+            <span class="status">● Completed practice project</span>
+            <h3>Dockerized Portfolio</h3>
+            <p>
+              A responsive portfolio website served by Nginx inside
+              a Docker container.
+            </p>
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Nginx</span>
+            </div>
+            <a class="button"
+               href="https://github.com/lakshmikumari-123/my-frst-website"
+               target="_blank" rel="noopener noreferrer">
+              View Source ↗
+            </a>
+          </article>
+
+          <article class="card project-card">
+            <span class="status">● Automated image publishing</span>
+            <h3>CI/CD with GitHub Actions</h3>
+            <p>
+              A workflow that builds the Docker image and pushes it
+              to Docker Hub when changes are committed to the main branch.
+            </p>
+            <div class="tags">
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">Docker</span>
+              <span class="tag">CI/CD</span>
+            </div>
+            <a class="button"
+               href="https://github.com/lakshmikumari-123/my-frst-website/actions"
+               target="_blank" rel="noopener noreferrer">
+              View Workflow ↗
+            </a>
+          </article>
+
+          <article class="card project-card">
+            <span class="status">● Container image</span>
+            <h3>Docker Hub Image</h3>
+            <p>
+              The portfolio image is published to Docker Hub and can
+              be pulled to run the website in a Docker container.
+            </p>
+            <div class="tags">
+              <span class="tag">Docker Hub</span>
+              <span class="tag">Container Images</span>
+            </div>
+            <a class="button"
+               href="https://hub.docker.com/repository/docker/kum6/my-devops-portfolio/tags"
+               target="_blank" rel="noopener noreferrer">
+              View Image ↗
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-panel">
+          <span class="eyebrow">Let's connect</span>
+          <h2>Have a project or opportunity?</h2>
+          <p>
+            I'm interested in learning opportunities, entry-level roles
+            and projects that help me grow in DevOps and software engineering.
+          </p>
+          <a class="button primary"
+             href="https://github.com/lakshmikumari-123"
+             target="_blank" rel="noopener noreferrer">
+            Connect on GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Built with HTML, CSS, Docker and GitHub Actions.</p>
+      <p>© 2026 Lakshmi Kumari · Learning and building step by step.</p>
+    </div>
+  </footer>
 </body>
 </html>
+```
