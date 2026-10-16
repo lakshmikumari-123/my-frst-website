@@ -4,453 +4,729 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1120">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Lakshmi Kumari's DevOps portfolio, projects, and technical learning journey.">
   <title>Lakshmi Kumari | DevOps Portfolio</title>
-  <meta name="description" content="Lakshmi Kumari's DevOps portfolio featuring Docker, GitHub Actions, AWS, Linux and CI/CD projects.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root {
-      --bg: #0b1120;
-      --panel: #111b2e;
-      --text: #e8eefb;
-      --muted: #9baac2;
-      --accent: #38bdf8;
+      --bg: #080b14;
+      --surface: #101522;
+      --surface2: #171e30;
+      --text: #edf2ff;
+      --muted: #9ba7bd;
+      --line: rgba(148,163,184,.18);
+      --accent: #60a5fa;
+      --purple: #a78bfa;
       --green: #4ade80;
-      --border: #25344b;
+      --header: rgba(8,11,20,.86);
     }
 
     body.light {
-      --bg: #f3f7fc;
-      --panel: #ffffff;
-      --text: #142033;
-      --muted: #526178;
-      --accent: #087eaf;
-      --green: #16864a;
-      --border: #d8e1ed;
+      --bg: #f5f7fc;
+      --surface: #fff;
+      --surface2: #eaf0fa;
+      --text: #182238;
+      --muted: #59677f;
+      --line: rgba(51,65,85,.17);
+      --accent: #2563eb;
+      --purple: #7c3aed;
+      --green: #15803d;
+      --header: rgba(245,247,252,.88);
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, sans-serif;
-      line-height: 1.7;
-      transition: background .25s, color .25s;
+      background: var(--bg); color: var(--text);
+      font-family: Inter, sans-serif; line-height: 1.7;
+      overflow-x: hidden; transition: background .25s, color .25s;
     }
-
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; cursor: pointer; }
-
-    .container { width: min(1080px, 90%); margin: auto; }
+    a { text-decoration: none; color: inherit; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .container { width: min(1100px, 91%); margin: auto; }
+    .mono { font-family: "JetBrains Mono", monospace; }
+    .muted { color: var(--muted); }
+    .gradient {
+      background: linear-gradient(100deg,var(--accent),var(--purple));
+      color: transparent; background-clip: text; -webkit-background-clip: text;
+    }
+    svg { width: 19px; height: 19px; }
+    #progress {
+      position: fixed; top: 0; left: 0; width: 0; height: 3px;
+      background: linear-gradient(90deg,var(--accent),var(--purple));
+      z-index: 1001;
+    }
+    #particles { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      background: var(--header); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
     }
-
-    nav {
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+    .nav {
+      min-height: 70px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
     }
-
-    .logo { font-weight: 800; font-size: 1.15rem; }
+    .logo { font-weight: 800; font-size: 1.12rem; letter-spacing: -.6px; }
     .logo span { color: var(--accent); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 18px;
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { color: var(--muted); font-size: .85rem; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-actions { display: flex; gap: 8px; }
+    .icon-btn {
+      display: grid; place-items: center; width: 40px; height: 40px;
+      color: var(--text); background: var(--surface);
+      border: 1px solid var(--line); border-radius: 11px;
     }
+    #menuBtn { display: none; }
 
-    .nav-links a:hover { color: var(--accent); }
-
-    .theme-btn, .menu-btn {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text);
-      border-radius: 9px;
-      padding: 8px 12px;
+    .hero { padding: 85px 0 65px; min-height: 80vh; display: flex; align-items: center; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 55px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      border: 1px solid var(--line); background: var(--surface);
+      padding: 7px 12px; border-radius: 99px;
+      color: var(--green); font: .76rem "JetBrains Mono",monospace;
     }
-
-    .menu-btn { display: none; }
-
-    .hero {
-      min-height: 78vh;
-      display: grid;
-      align-items: center;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 45px;
-      padding-top: 65px;
-      padding-bottom: 65px;
-    }
-
-    .eyebrow { color: var(--green); font-weight: 700; }
-
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4.7rem);
-      line-height: 1.1;
-      margin: 15px 0;
-      letter-spacing: -2px;
-    }
-
-    h1 span, .accent { color: var(--accent); }
-    .intro { color: var(--muted); max-width: 620px; font-size: 1.08rem; }
-
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
-
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
+    h1 { font-size: clamp(2.8rem,6vw,4.8rem); line-height: 1.1; letter-spacing: -3px; margin: 22px 0 12px; }
+    .typed-line { color: var(--accent); min-height: 32px; font: 500 1rem "JetBrains Mono",monospace; }
+    .hero-copy { color: var(--muted); margin: 20px 0 26px; max-width: 580px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
-      display: inline-block;
-      border-radius: 9px;
-      padding: 11px 18px;
-      border: 1px solid var(--accent);
-      background: var(--accent);
-      color: #07111f;
-      font-weight: 750;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid var(--line); border-radius: 11px;
+      padding: 11px 15px; color: var(--text); background: var(--surface);
+      font-size: .87rem; font-weight: 600;
+      transition: transform .2s,border-color .2s,box-shadow .2s;
     }
+    .btn:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 28px #3b82f622; }
+    .btn.primary { color: white; border-color: transparent; background: linear-gradient(110deg,#2563eb,#7c3aed); }
 
-    .btn.secondary { background: transparent; color: var(--text); }
-
-    .terminal {
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #080e19;
-      border-radius: 14px;
-      box-shadow: 0 20px 60px #0003;
-      color: #d8e7f8;
+    .photo-wrap { width: min(330px,100%); margin: auto; position: relative; }
+    .photo-glow {
+      position: absolute; inset: -4px; border-radius: 25px;
+      background: conic-gradient(var(--accent),var(--purple),#34d399,var(--accent));
+      filter: blur(12px); opacity: .65;
+      animation: hue 7s linear infinite;
     }
-
-    .terminal-head {
-      padding: 12px 15px;
-      border-bottom: 1px solid #273449;
-      display: flex;
-      gap: 7px;
-      align-items: center;
-      color: #b8c8df;
-      font-size: .85rem;
+    @keyframes hue { to { filter: hue-rotate(360deg) blur(12px); } }
+    .photo-card {
+      position: relative; overflow: hidden; padding: 9px;
+      border-radius: 23px; background: var(--surface); border: 1px solid var(--line);
+      transition: transform .2s;
     }
-
-    .dot { width: 10px; height: 10px; border-radius: 50%; background: #fb7185; }
-    .dot:nth-child(2) { background: #fbbf24; }
-    .dot:nth-child(3) { background: #4ade80; }
-
-    .terminal-body { padding: 22px; font: .92rem/2 monospace; }
-    .prompt { color: #4ade80; }
-    .terminal-body p { margin: 0; }
-    .terminal-output { color: #7dd3fc; }
-    .cursor { animation: blink 1s steps(2) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    section { padding: 65px 0; scroll-margin-top: 75px; }
-    .section-title { font-size: 2rem; margin: 0 0 8px; }
-    .section-sub { color: var(--muted); margin: 0 0 28px; }
-
-    .about-box, .card, .skill, .contact-box {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 14px;
+    .photo-card img {
+      display: block; width: 100%; height: 365px; object-fit: cover;
+      object-position: center 25%; border-radius: 15px; background: var(--surface2);
     }
+    .photo-caption { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 13px 7px 7px; }
+    .photo-caption strong { display: block; font-size: .92rem; }
+    .photo-caption small { color: var(--muted); }
+    .status { color: var(--green); font: .7rem "JetBrains Mono",monospace; }
 
-    .about-box { padding: 25px; }
-    .about-box p { color: var(--muted); }
+    section { padding: 75px 0; }
+    .kicker { color: var(--accent); font: .78rem "JetBrains Mono",monospace; margin-bottom: 8px; }
+    h2 { font-size: clamp(1.9rem,4vw,2.7rem); letter-spacing: -1.2px; line-height: 1.25; }
+    .section-desc { color: var(--muted); max-width: 650px; margin-top: 10px; }
+    .section-head { margin-bottom: 28px; }
 
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 13px;
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 25px; }
+    .stat { padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+    .stat strong { display: block; font-size: 1.55rem; color: var(--accent); }
+    .stat span { color: var(--muted); font-size: .82rem; }
+
+    .skills { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; }
+    .skill, .project, .journey-card, .contact-card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 15px; transition: transform .23s,border-color .23s;
     }
+    .skill { padding: 19px; }
+    .skill:hover, .project:hover, .journey-card:hover, .contact-card:hover {
+      transform: translateY(-5px); border-color: var(--accent);
+    }
+    .skill-icon, .project-icon, .journey-icon {
+      display: grid; place-items: center; width: 43px; height: 43px;
+      background: var(--surface2); border-radius: 12px; color: var(--accent); margin-bottom: 13px;
+    }
+    .skill h3 { font-size: .94rem; }
+    .skill p { color: var(--muted); font-size: .79rem; margin-top: 5px; }
 
-    .skill { padding: 17px; text-align: center; transition: transform .2s, border-color .2s; }
-    .skill:hover { transform: translateY(-4px); border-color: var(--accent); }
-    .skill span { display: block; font-size: 1.5rem; }
-    .skill small { color: var(--muted); }
-
-    .filters { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 20px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
     .filter {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text);
-      padding: 8px 13px;
-      border-radius: 20px;
+      border: 1px solid var(--line); background: var(--surface);
+      color: var(--muted); padding: 8px 13px; border-radius: 99px; font-size: .82rem;
     }
-    .filter.active { background: var(--accent); color: #07111f; }
+    .filter.active, .filter:hover { background: #2563eb; border-color: #2563eb; color: white; }
+    .projects { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .project { padding: 22px; }
+    .project-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+    .project-icon { margin: 0; }
+    .project-type { color: var(--muted); font: .7rem "JetBrains Mono",monospace; }
+    .project h3 { font-size: 1.08rem; margin-bottom: 7px; }
+    .project p { color: var(--muted); font-size: .87rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .tag { padding: 4px 8px; border-radius: 6px; background: var(--surface2); color: var(--accent); font: .7rem "JetBrains Mono",monospace; }
+    .project-links { display: flex; gap: 13px; margin-top: 18px; }
+    .project-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: .83rem; }
+    .project-links svg { width: 15px; }
+    .project[hidden] { display: none; }
 
-    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .card { padding: 23px; transition: transform .2s, border-color .2s; }
-    .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-    .card h3 { margin-top: 0; }
-    .card p { color: var(--muted); }
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0; }
-    .tag { font-size: .8rem; border-radius: 6px; background: var(--bg); padding: 4px 8px; color: var(--accent); }
-    .project-link { color: var(--accent); font-weight: 700; }
+    .terminal { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; overflow: hidden; margin-top: 27px; }
+    .terminal-head { padding: 11px 14px; background: var(--surface2); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .terminal-dots { display: flex; gap: 5px; }
+    .terminal-dots i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #64748b; }
+    .terminal-body { padding: 15px; font: .78rem/1.9 "JetBrains Mono",monospace; min-height: 100px; overflow-wrap: anywhere; }
+    .cmd { color: var(--green); }
+    .output { color: var(--muted); white-space: pre-wrap; }
+    .terminal-form { display: flex; gap: 8px; padding: 0 14px 14px; }
+    .terminal-form input { min-width: 0; flex: 1; padding: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); border-radius: 8px; outline: none; font: .78rem "JetBrains Mono",monospace; }
+    .terminal-form input:focus { border-color: var(--accent); }
+    .terminal-form button { border: 0; border-radius: 8px; background: var(--accent); color: #08101e; padding: 0 13px; font-weight: 700; }
 
-    .contact-box { padding: 27px; text-align: center; }
-    .contact-box p { color: var(--muted); }
-    footer { border-top: 1px solid var(--border); padding: 24px 0; color: var(--muted); text-align: center; }
+    .journey { display: grid; gap: 12px; }
+    .journey-card { display: flex; align-items: flex-start; gap: 14px; padding: 20px; }
+    .journey-icon { flex-shrink: 0; margin: 0; }
+    .journey-card h3 { font-size: .98rem; }
+    .journey-card p { color: var(--muted); font-size: .86rem; margin-top: 5px; }
 
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s, transform .6s; }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 16px; }
+    .contact-card { padding: 23px; }
+    .contact-line { display: flex; align-items: center; gap: 11px; margin-top: 17px; color: var(--muted); overflow-wrap: anywhere; }
+    .contact-line svg { color: var(--accent); flex-shrink: 0; }
+    .contact-line a:hover { color: var(--accent); }
+    .form { display: grid; gap: 12px; }
+    .form label { display: block; color: var(--muted); font-size: .82rem; margin-bottom: 4px; }
+    .form input, .form textarea {
+      width: 100%; border: 1px solid var(--line); background: var(--bg);
+      color: var(--text); border-radius: 9px; padding: 11px 12px; outline: none;
+    }
+    .form input:focus, .form textarea:focus { border-color: var(--accent); }
+    .form textarea { min-height: 100px; resize: vertical; }
+    .note { font-size: .76rem; color: var(--muted); }
+    footer { border-top: 1px solid var(--line); padding: 23px 0; color: var(--muted); font-size: .8rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .back-top { color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s,transform .6s; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    #top-btn {
-      position: fixed; right: 20px; bottom: 20px; display: none;
-      background: var(--accent); color: #07111f; border: 0;
-      border-radius: 50%; width: 43px; height: 43px; font-size: 1.2rem;
+    #toast {
+      position: fixed; z-index: 200; bottom: 20px; left: 50%;
+      transform: translate(-50%,15px); opacity: 0; pointer-events: none;
+      padding: 11px 16px; background: var(--surface2); border: 1px solid var(--line);
+      border-radius: 10px; box-shadow: 0 10px 35px #0003; transition: .25s;
+      max-width: 90%; text-align: center; font-size: .84rem;
     }
-
-    @media (max-width: 760px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; gap: 28px; }
-      .skills { grid-template-columns: repeat(2, 1fr); }
-      .projects { grid-template-columns: 1fr; }
-      .menu-btn { display: block; }
-      nav { flex-wrap: wrap; padding: 12px 0; }
-      .nav-links { display: none; width: 100%; padding: 10px 0; }
-      .nav-links.open { display: flex; }
-      h1 { letter-spacing: -1px; }
-    }
+    #toast.show { opacity: 1; transform: translate(-50%,0); }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 850px) {
+      .hero { padding-top: 55px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 35px; }
+      .photo-wrap { width: min(280px,85%); }
+      .photo-card img { height: 315px; }
+      .skills { grid-template-columns: repeat(2,1fr); }
+      .nav-links {
+        display: none; position: absolute; top: 70px; left: 0; right: 0;
+        padding: 18px 5%; background: var(--surface); border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: stretch; gap: 13px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 4px 0; }
+      #menuBtn { display: grid; }
+    }
+    @media (max-width: 560px) {
+      h1 { letter-spacing: -1.8px; }
+      section { padding: 55px 0; }
+      .projects, .contact-grid, .stats { grid-template-columns: 1fr; }
+      .skills { gap: 9px; }
+      .skill { padding: 14px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 
 <body>
+  <div id="progress"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div id="toast" role="status" aria-live="polite"></div>
+
   <header>
-    <nav class="container">
-      <a class="logo" href="#home">&lt; Lakshmi<span> /&gt;</span></a>
-      <button class="menu-btn" id="menu-btn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-      <div class="nav-links" id="nav-links">
+    <div class="container nav">
+      <a href="#home" class="logo">lakshmi<span>.dev</span></a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
+        <a href="#terminal">Terminal</a>
         <a href="#contact">Contact</a>
-        <button class="theme-btn" id="theme-btn" aria-label="Toggle light and dark theme">☀️ Theme</button>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" aria-label="Switch theme" title="Switch theme"><i data-lucide="sun-moon"></i></button>
+        <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
-    <section class="container hero" id="home">
-      <div>
-        <p class="eyebrow">● AVAILABLE FOR OPPORTUNITIES</p>
-        <p>Hello, I'm</p>
-        <h1>Lakshmi<br><span>Kumari.</span></h1>
-        <h2>I'm learning <span class="accent" id="typed">DevOps</span><span class="cursor">|</span></h2>
-        <p class="intro">Computer Science graduate exploring DevOps, cloud infrastructure, containerization and CI/CD. I enjoy learning how to build, deploy and maintain reliable applications.</p>
-        <div class="actions">
-          <a class="btn" href="#projects">Explore Projects ↗</a>
-          <a class="btn secondary" href="#contact">Contact Me</a>
-        </div>
-      </div>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><span class="dot"></span> DEVOPS PORTFOLIO · 2026</div>
+          <h1>Hi, I'm Lakshmi<br><span class="gradient">Kumari.</span></h1>
+          <div class="typed-line"><span id="typed"></span><span class="cursor">_</span></div>
+          <p class="hero-copy">
+            Computer Science graduate exploring DevOps, cloud infrastructure,
+            automation, and CI/CD. I'm learning how applications move from code
+            to deployment and how systems can run more reliably.
+          </p>
+          <div class="buttons">
+            <a class="btn primary" href="#projects"><i data-lucide="folder-code"></i> Explore projects</a>
+            <a class="btn" href="#contact"><i data-lucide="send"></i> Contact me</a>
+            <a class="btn" href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> GitHub</a>
+          </div>
 
-      <div class="terminal" aria-label="Interactive sample terminal">
-        <div class="terminal-head"><i class="dot"></i><i class="dot"></i><i class="dot"></i> lakshmi@portfolio:~</div>
-        <div class="terminal-body">
-          <p><span class="prompt">$</span> whoami</p>
-          <p class="terminal-output">lakshmi-kumari</p>
-          <p><span class="prompt">$</span> skills --list</p>
-          <p class="terminal-output">Linux · Git · Docker</p>
-          <p class="terminal-output">GitHub Actions · AWS</p>
-          <p><span class="prompt">$</span> status</p>
-          <p class="terminal-output">Learning and building 🚀</p>
-          <p><span class="prompt">$</span> <span class="cursor">_</span></p>
+          <div class="terminal" id="terminal">
+            <div class="terminal-head">
+              <div class="terminal-dots"><i></i><i></i><i></i></div>
+              <span class="muted mono" style="font-size:.73rem">lakshmi@portfolio:~</span>
+              <i data-lucide="terminal"></i>
+            </div>
+            <div class="terminal-body" id="terminalOutput" aria-live="polite"><span class="cmd">$ help</span><br><span class="output">Try: about, skills, projects, github, clear</span></div>
+            <form class="terminal-form" id="terminalForm">
+              <input id="terminalInput" aria-label="Enter a terminal command" placeholder="Type a command..." autocomplete="off">
+              <button type="submit">Run</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="photo-wrap reveal" id="photoWrap">
+          <div class="photo-glow"></div>
+          <div class="photo-card" id="photoCard">
+            <img src="profile.jpg" alt="Lakshmi Kumari" id="profileImage">
+            <div class="photo-caption">
+              <div><strong>Lakshmi Kumari</strong><small class="muted">DevOps & Cloud Learner</small></div>
+              <span class="status"><span class="dot" style="display:inline-block"></span> LEARNING</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="about">
       <div class="container reveal">
-        <h2 class="section-title">About <span class="accent">Me</span></h2>
-        <p class="section-sub">A little about my journey.</p>
-        <div class="about-box">
-          <p>I'm a Computer Science and Engineering graduate interested in DevOps and cloud technologies. I'm developing my skills through hands-on learning and portfolio projects.</p>
-          <p>My focus is understanding how source code moves through build, containerization and deployment workflows, while learning to monitor applications and troubleshoot issues responsibly.</p>
-          <strong>Current focus:</strong> Docker, CI/CD, Linux and AWS fundamentals.
+        <div class="section-head">
+          <div class="kicker">// 01 — ABOUT ME</div>
+          <h2>Building my path in <span class="gradient">DevOps.</span></h2>
+          <p class="section-desc">I am a Computer Science graduate developing practical skills in containers, version control, cloud fundamentals, and deployment automation.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>2025</strong><span>B.Tech CSE graduate</span></div>
+          <div class="stat"><strong>8.77/10</strong><span>Graduation CGPA</span></div>
+          <div class="stat"><strong>CI/CD</strong><span>Learning workflow automation</span></div>
         </div>
       </div>
     </section>
 
     <section id="skills">
       <div class="container reveal">
-        <h2 class="section-title">Technical <span class="accent">Skills</span></h2>
-        <p class="section-sub">Tools and technologies I'm learning and using.</p>
+        <div class="section-head">
+          <div class="kicker">// 02 — TOOLKIT</div>
+          <h2>My technical <span class="gradient">toolkit.</span></h2>
+          <p class="section-desc">Technologies and concepts in my learning journey.</p>
+        </div>
         <div class="skills">
-          <div class="skill"><span>🐧</span><strong>Linux</strong><br><small>Commands & basics</small></div>
-          <div class="skill"><span>🔀</span><strong>Git & GitHub</strong><br><small>Version control</small></div>
-          <div class="skill"><span>🐳</span><strong>Docker</strong><br><small>Container basics</small></div>
-          <div class="skill"><span>⚙️</span><strong>CI/CD</strong><br><small>GitHub Actions</small></div>
-          <div class="skill"><span>☁️</span><strong>AWS</strong><br><small>Cloud fundamentals</small></div>
-          <div class="skill"><span>🏗️</span><strong>Terraform</strong><br><small>Infrastructure as code</small></div>
-          <div class="skill"><span>☕</span><strong>Java</strong><br><small>Programming</small></div>
-          <div class="skill"><span>🗄️</span><strong>SQL</strong><br><small>Database queries</small></div>
+          <article class="skill"><div class="skill-icon"><i data-lucide="terminal"></i></div><h3>Linux</h3><p>Commands, files, processes and system basics.</p></article>
+          <article class="skill"><div class="skill-icon"><i data-lucide="git-branch"></i></div><h3>Git & GitHub</h3><p>Repositories, commits and version control.</p></article>
+          <article class="skill"><div class="skill-icon"><i data-lucide="container"></i></div><h3>Docker</h3><p>Images, containers and Dockerfiles.</p></article>
+          <article class="skill"><div class="skill-icon"><i data-lucide="workflow"></i></div><h3>GitHub Actions</h3><p>Workflow automation and CI/CD basics.</p></article>
+          <article class="skill"><div class="skill-icon"><i data-lucide="cloud"></i></div><h3>AWS</h3><p>Cloud services and infrastructure basics.</p></article>
+          <article class="skill"><div class="skill-icon"><i data-lucide="database"></i></div><h3>SQL</h3><p>Queries and relational databases.</p></article>
+          <article class="skill"><div class="skill-icon"><i data-lucide="coffee"></i></div><h3>Java</h3><p>Core programming fundamentals.</p></article>
+          <article class="skill"><div class="skill-icon"><i data-lucide="code-2"></i></div><h3>REST APIs</h3><p>HTTP requests and endpoint concepts.</p></article>
         </div>
       </div>
     </section>
 
     <section id="projects">
       <div class="container reveal">
-        <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
-        <p class="section-sub">Explore my learning and portfolio work.</p>
-        <div class="filters" aria-label="Filter projects">
-          <button class="filter active" data-filter="all">All</button>
+        <div class="section-head">
+          <div class="kicker">// 03 — PROJECTS</div>
+          <h2>Things I'm <span class="gradient">working on.</span></h2>
+          <p class="section-desc">Filter by category to explore my portfolio and learning areas.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="filter active" data-filter="all">All projects</button>
           <button class="filter" data-filter="docker">Docker</button>
           <button class="filter" data-filter="cicd">CI/CD</button>
           <button class="filter" data-filter="cloud">Cloud</button>
+          <button class="filter" data-filter="java">Java</button>
         </div>
-
-        <div class="projects">
-          <article class="card" data-category="docker cicd">
-            <h3>🚀 DevOps Portfolio Website</h3>
-            <p>A responsive portfolio website packaged with Docker, with a GitHub Actions workflow for building the image.</p>
+        <div class="projects" id="projectGrid">
+          <article class="project" data-category="docker cicd">
+            <div class="project-top"><div class="project-icon"><i data-lucide="layers"></i></div><span class="project-type">PORTFOLIO</span></div>
+            <h3>Dockerized DevOps Portfolio</h3>
+            <p>A responsive portfolio packaged with Docker and connected to a GitHub Actions workflow.</p>
             <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span></div>
-            <a class="project-link" href="https://github.com/lakshmikumari-123/my-frst-website" target="_blank" rel="noopener noreferrer">View Repository ↗</a>
+            <div class="project-links"><a href="https://github.com/lakshmikumari-123/my-frst-website" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> View repository</a></div>
           </article>
+          <article class="project" data-category="docker cicd">
+            <div class="project-top"><div class="project-icon"><i data-lucide="container"></i></div><span class="project-type">PRACTICE</span></div>
+            <h3>Container Build Pipeline</h3>
+            <p>Practice building a Docker image and automating image builds with a workflow.</p>
+            <div class="tags"><span class="tag">Dockerfile</span><span class="tag">CI/CD</span><span class="tag">GitHub</span></div>
+            <div class="project-links"><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> GitHub profile</a></div>
+          </article>
+          <article class="project" data-category="cloud">
+            <div class="project-top"><div class="project-icon"><i data-lucide="cloud-cog"></i></div><span class="project-type">LEARNING</span></div>
+            <h3>AWS Fundamentals</h3>
+            <p>Learning IAM, S3, networking, security groups and cost-conscious cloud usage.</p>
+            <div class="tags"><span class="tag">AWS</span><span class="tag">IAM</span><span class="tag">S3</span></div>
+            <div class="project-links"><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link"></i> GitHub profile</a></div>
+          </article>
+          <article class="project" data-category="java">
+            <div class="project-top"><div class="project-icon"><i data-lucide="coffee"></i></div><span class="project-type">PRACTICE</span></div>
+            <h3>Java & API Practice</h3>
+            <p>Developing Java, SQL and REST API fundamentals through programming practice.</p>
+            <div class="tags"><span class="tag">Java</span><span class="tag">SQL</span><span class="tag">REST APIs</span></div>
+            <div class="project-links"><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> GitHub profile</a></div>
+          </article>
+        </div>
+        <p id="noProjects" class="muted" hidden style="margin-top:15px">No projects in this category yet.</p>
+      </div>
+    </section>
 
-          <article class="card" data-category="docker cicd">
-            <h3>🐳 Docker Image Build</h3>
-            <p>A learning project focused on packaging an application into a Docker image and exploring automated image builds.</p>
-            <div class="tags"><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">Containers</span></div>
-            <a class="project-link" href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a>
-          </article>
+    <section id="journey">
+      <div class="container reveal">
+        <div class="section-head">
+          <div class="kicker">// 04 — MY JOURNEY</div>
+          <h2>Learn. Practise. <span class="gradient">Improve.</span></h2>
+          <p class="section-desc">My current learning path toward DevOps and cloud engineering.</p>
+        </div>
+        <div class="journey">
+          <article class="journey-card"><div class="journey-icon"><i data-lucide="git-branch"></i></div><div><h3>Version control</h3><p>Practising Git, GitHub, repository management and commits.</p></div></article>
+          <article class="journey-card"><div class="journey-icon"><i data-lucide="container"></i></div><div><h3>Containers & automation</h3><p>Learning Docker images and containers, then automating builds with GitHub Actions.</p></div></article>
+          <article class="journey-card"><div class="journey-icon"><i data-lucide="cloud"></i></div><div><h3>Cloud fundamentals</h3><p>Studying AWS, permissions, networking, and cost awareness.</p></div></article>
+        </div>
+      </div>
+    </section>
 
-          <article class="card" data-category="cloud">
-            <h3>☁️ AWS Fundamentals</h3>
-            <p>Learning cloud infrastructure concepts including EC2, S3, IAM, networking and cost-aware resource management.</p>
-            <div class="tags"><span class="tag">AWS</span><span class="tag">EC2</span><span class="tag">S3</span></div>
-            <a class="project-link" href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a>
-          </article>
-
-          <article class="card" data-category="cicd">
-            <h3>⚙️ CI/CD Learning</h3>
-            <p>Exploring how source code changes can trigger automated build workflows and help make deployments more consistent.</p>
-            <div class="tags"><span class="tag">GitHub</span><span class="tag">Automation</span><span class="tag">Workflows</span></div>
-            <a class="project-link" href="https://github.com/lakshmikumari-123/my-frst-website" target="_blank" rel="noopener noreferrer">View Repository ↗</a>
-          </article>
+    <section>
+      <div class="container reveal">
+        <div class="section-head">
+          <div class="kicker">// 05 — TRY IT YOURSELF</div>
+          <h2>A little interactive <span class="gradient">terminal.</span></h2>
+          <p class="section-desc">Type a command below and explore the portfolio without leaving the page.</p>
+        </div>
+        <div class="terminal">
+          <div class="terminal-head"><span class="mono muted">portfolio-shell</span><i data-lucide="terminal"></i></div>
+          <div class="terminal-body" id="terminalOutput2" aria-live="polite"><span class="output">Welcome. Type help to see available commands.</span></div>
+          <form class="terminal-form" id="terminalForm2">
+            <input id="terminalInput2" aria-label="Terminal command" placeholder="help, about, skills, projects, github..." autocomplete="off">
+            <button type="submit">Run</button>
+          </form>
         </div>
       </div>
     </section>
 
     <section id="contact">
       <div class="container reveal">
-        <div class="contact-box">
-          <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
-          <p>Open to learning opportunities, collaboration and suitable entry-level DevOps roles.</p>
-          <div class="actions" style="justify-content:center">
-            <a class="btn" href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
-            <button class="btn secondary" id="copy-email">Copy Email</button>
+        <div class="section-head">
+          <div class="kicker">// 06 — CONTACT</div>
+          <h2>Let's <span class="gradient">connect.</span></h2>
+          <p class="section-desc">For DevOps discussions, collaboration, and entry-level opportunities.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Find me online</h3>
+            <div class="contact-line"><i data-lucide="github"></i><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer">github.com/lakshmikumari-123</a></div>
+            <div class="contact-line"><i data-lucide="code-2"></i><span>DevOps · Docker · CI/CD · AWS</span></div>
+            <p class="note" style="margin-top:20px">Add your professional email address when you're ready to publish it.</p>
           </div>
-          <p id="copy-status" aria-live="polite"></p>
-          <p>To contact me, please use the contact details listed on my GitHub profile.</p>
+          <div class="contact-card">
+            <form class="form" id="contactForm">
+              <div><label for="visitorName">Your name</label><input id="visitorName" required maxlength="80" placeholder="Enter your name"></div>
+              <div><label for="visitorEmail">Your email</label><input id="visitorEmail" type="email" required maxlength="120" placeholder="you@example.com"></div>
+              <div><label for="visitorMessage">Message</label><textarea id="visitorMessage" required maxlength="1500" placeholder="Write a message..."></textarea></div>
+              <button class="btn primary" type="submit"><i data-lucide="mail"></i> Prepare email</button>
+              <p class="note">This opens your email app. It does not send or store messages on this website.</p>
+            </form>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      <p>© <span id="year"></span> Lakshmi Kumari · Built with curiosity and code.</p>
-      <a class="project-link" href="#home">Back to top ↑</a>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Lakshmi Kumari · HTML, CSS & JavaScript</span>
+      <a href="#home" class="back-top">Back to top <i data-lucide="arrow-up"></i></a>
     </div>
   </footer>
 
-  <button id="top-btn" aria-label="Back to top">↑</button>
-
   <script>
-    const typed = document.getElementById("typed");
-    const words = ["DevOps", "Docker", "CI/CD", "Cloud"];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
+    // Initialize Lucide icons.
+    function icons() {
+      if (window.lucide) window.lucide.createIcons();
+    }
+    icons();
 
-    function typeEffect() {
+    // Theme switcher.
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      document.body.classList.toggle("light");
+      this.innerHTML = document.body.classList.contains("light")
+        ? '<i data-lucide="moon"></i>'
+        : '<i data-lucide="sun-moon"></i>';
+      icons();
+    });
+
+    // Responsive mobile menu.
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn.addEventListener("click", function () {
+      const opened = navLinks.classList.toggle("open");
+      this.setAttribute("aria-expanded", String(opened));
+      this.innerHTML = opened ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+      icons();
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuBtn.innerHTML = '<i data-lucide="menu"></i>';
+      icons();
+    }));
+
+    // Typing animation.
+    const words = ["DevOps Learner", "Docker Enthusiast", "CI/CD Explorer", "Cloud Computing Learner"];
+    const typed = document.getElementById("typed");
+    let wordIndex = 0, charIndex = 0, deleting = false;
+    function typeRole() {
       const word = words[wordIndex];
       typed.textContent = word.slice(0, charIndex);
       if (!deleting && charIndex < word.length) {
         charIndex++;
-        setTimeout(typeEffect, 115);
+        setTimeout(typeRole, 85);
       } else if (!deleting) {
         deleting = true;
-        setTimeout(typeEffect, 1000);
+        setTimeout(typeRole, 1200);
       } else if (charIndex > 0) {
         charIndex--;
-        setTimeout(typeEffect, 55);
+        setTimeout(typeRole, 40);
       } else {
         deleting = false;
         wordIndex = (wordIndex + 1) % words.length;
-        setTimeout(typeEffect, 250);
+        setTimeout(typeRole, 250);
       }
     }
-    typeEffect();
+    typeRole();
 
-    document.getElementById("theme-btn").addEventListener("click", () => {
-      document.body.classList.toggle("light");
-      document.getElementById("theme-btn").textContent =
-        document.body.classList.contains("light") ? "🌙 Theme" : "☀️ Theme";
-    });
+    // Scroll progress bar.
+    function updateProgress() {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
+      document.getElementById("progress").style.width = progress + "%";
+    }
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
 
-    const menuBtn = document.getElementById("menu-btn");
-    const navLinks = document.getElementById("nav-links");
-
-    menuBtn.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", String(open));
-    });
-
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuBtn.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    document.querySelectorAll(".filter").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
-        button.classList.add("active");
-        const filter = button.dataset.filter;
-
-        document.querySelectorAll(".card[data-category]").forEach(card => {
-          card.hidden = filter !== "all" && !card.dataset.category.split(" ").includes(filter);
-        });
-      });
-    });
-
-    const observer = new IntersectionObserver(entries => {
+    // Reveal sections when they enter view.
+    const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
-    document.querySelectorAll(".reveal").forEach(section => observer.observe(section));
+    // Highlight the active navigation link.
+    const sections = document.querySelectorAll("main section[id]");
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.querySelectorAll("a").forEach(a => {
+            a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: "-25% 0px -65% 0px" });
+    sections.forEach(section => navObserver.observe(section));
 
-    const topBtn = document.getElementById("top-btn");
-    window.addEventListener("scroll", () => {
-      topBtn.style.display = window.scrollY > 350 ? "block" : "none";
+    // Interactive project filters.
+    const filters = document.querySelectorAll(".filter");
+    const projects = document.querySelectorAll(".project");
+    filters.forEach(button => button.addEventListener("click", () => {
+      filters.forEach(b => b.classList.remove("active"));
+      button.classList.add("active");
+      let shown = 0;
+      projects.forEach(project => {
+        const categories = project.dataset.category.split(" ");
+        const match = button.dataset.filter === "all" || categories.includes(button.dataset.filter);
+        project.hidden = !match;
+        if (match) shown++;
+      });
+      document.getElementById("noProjects").hidden = shown !== 0;
+    }));
+
+    // Small toast notification.
+    let toastTimer;
+    function toast(message) {
+      const box = document.getElementById("toast");
+      box.textContent = message;
+      box.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => box.classList.remove("show"), 2500);
+    }
+
+    // Interactive demo terminal. These are simulated commands, not a real shell.
+    function runCommand(command, outputId) {
+      const output = document.getElementById(outputId);
+      const cmd = command.trim().toLowerCase();
+      const responses = {
+        help: "Available commands: help, about, skills, projects, github, clear",
+        about: "Lakshmi Kumari | Computer Science graduate | DevOps learner",
+        skills: "Linux | Git | GitHub | Docker | GitHub Actions | AWS | Java | SQL | REST APIs",
+        projects: "Portfolio: my-frst-website\nOpen the Projects section to explore learning areas.",
+        github: "Opening Lakshmi's GitHub profile..."
+      };
+      if (cmd === "clear") {
+        output.innerHTML = "";
+        return;
+      }
+      if (cmd === "github") {
+        output.innerHTML = '<span class="cmd">$ ' + safe(command) + '</span><br><span class="output">' + responses.github + '</span>';
+        window.open("https://github.com/lakshmikumari-123", "_blank", "noopener,noreferrer");
+        return;
+      }
+      const result = responses[cmd] || "Command not found. Type help to see available commands.";
+      output.innerHTML = '<span class="cmd">$ ' + safe(command) + '</span><br><span class="output">' + safe(result) + '</span>';
+    }
+    function safe(value) {
+      return value.replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    document.getElementById("terminalForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const input = document.getElementById("terminalInput");
+      if (!input.value.trim()) return;
+      runCommand(input.value, "terminalOutput");
+      input.value = "";
     });
-    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.getElementById("terminalForm2").addEventListener("submit", event => {
+      event.preventDefault();
+      const input = document.getElementById("terminalInput2");
+      if (!input.value.trim()) return;
+      runCommand(input.value, "terminalOutput2");
+      input.value = "";
+    });
+
+    // Subtle 3D tilt on the profile card.
+    const photoCard = document.getElementById("photoCard");
+    const photoWrap = document.getElementById("photoWrap");
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      photoWrap.addEventListener("mousemove", event => {
+        const rect = photoWrap.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        photoCard.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+      });
+      photoWrap.addEventListener("mouseleave", () => photoCard.style.transform = "");
+    }
+
+    // Lightweight animated background particles.
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let points = [];
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      points = Array.from({ length: Math.min(45, Math.floor(window.innerWidth / 25)) }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - .5) * .25,
+        vy: (Math.random() - .5) * .25
+      }));
+    }
+    function animateParticles() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      const light = document.body.classList.contains("light");
+      const color = light ? "37,99,235" : "96,165,250";
+      points.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+        if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},.45)`;
+        ctx.fill();
+        for (let j = i + 1; j < points.length; j++) {
+          const q = points[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 105) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(${color},${(1 - distance / 105) * .11})`;
+            ctx.stroke();
+          }
+        }
+      });
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        requestAnimationFrame(animateParticles);
+      }
+    }
+    resizeCanvas();
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      animateParticles();
+    }
+    window.addEventListener("resize", resizeCanvas);
+
+    // Contact form creates an email draft; it does not send data to a server.
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const name = document.getElementById("visitorName").value.trim();
+      const email = document.getElementById("visitorEmail").value.trim();
+      const message = document.getElementById("visitorMessage").value.trim();
+      const subject = encodeURIComponent("Portfolio contact from " + name);
+      const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\n" + message);
+      // Replace this address with your real professional email before using the form.
+      const recipient = "";
+      if (!recipient) {
+        toast("Add your professional email in the contact form code first.");
+        return;
+      }
+      window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+    });
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    document.getElementById("copy-email").addEventListener("click", async () => {
-      const status = document.getElementById("copy-status");
-      try {
-        await navigator.clipboard.writeText("lakshmikumari@example.com");
-        status.textContent = "Demo email copied. Replace it with your real email in index.html.";
-      } catch {
-        status.textContent = "Add your real email address to this button in index.html.";
-      }
+    // If the photo cannot be found, display a clear fallback.
+    document.getElementById("profileImage").addEventListener("error", function () {
+      this.style.display = "none";
+      const fallback = document.createElement("div");
+      fallback.style.cssText = "height:300px;display:grid;place-items:center;text-align:center;color:var(--muted);padding:20px";
+      fallback.innerHTML = '<div><i data-lucide="image"></i><p>Check the profile.jpg file path in GitHub.</p></div>';
+      this.parentElement.insertBefore(fallback, this);
+      icons();
     });
   </script>
 </body>
