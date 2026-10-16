@@ -4,20 +4,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1020">
-  <meta name="description" content="DevOps portfolio showcasing skills, projects, and learning journey.">
-  <title>DevOps Portfolio | Lakshmi Kumari</title>
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Lakshmi Kumari's DevOps and cloud portfolio">
+  <title>Lakshmi Kumari | DevOps Portfolio</title>
 
   <style>
     :root {
-      --bg: #0b1020;
-      --surface: #111a2e;
-      --surface-light: #172239;
-      --text: #edf2ff;
-      --muted: #a4afc5;
-      --accent: #45e0b0;
-      --border: rgba(164, 175, 197, 0.16);
-      --max-width: 1080px;
+      --bg: #080b14;
+      --surface: #101522;
+      --surface2: #171e30;
+      --text: #edf1ff;
+      --muted: #9ba8c0;
+      --accent: #619bff;
+      --purple: #9061f9;
+      --green: #42e6a4;
+      --border: #283145;
+      --nav: rgba(8, 11, 20, .94);
+    }
+
+    body.light {
+      --bg: #f5f7fc;
+      --surface: #ffffff;
+      --surface2: #edf1fa;
+      --text: #152039;
+      --muted: #59657a;
+      --accent: #316fe5;
+      --purple: #8050df;
+      --green: #07885b;
+      --border: #dce2ed;
+      --nav: rgba(245, 247, 252, .94);
     }
 
     * {
@@ -36,6 +51,7 @@
       color: var(--text);
       font-family: Inter, "Segoe UI", Arial, sans-serif;
       line-height: 1.7;
+      transition: background .25s, color .25s;
       overflow-x: hidden;
     }
 
@@ -44,45 +60,46 @@
       text-decoration: none;
     }
 
-    button, a {
-      -webkit-tap-highlight-color: transparent;
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
     }
 
     .container {
-      width: min(var(--max-width), 88%);
-      margin: 0 auto;
+      width: min(1120px, 88%);
+      margin: auto;
     }
 
     .accent {
       color: var(--accent);
     }
 
-    .muted {
-      color: var(--muted);
-    }
-
     /* NAVIGATION */
-    .navbar {
+
+    header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(11, 16, 32, 0.92);
-      backdrop-filter: blur(14px);
+      z-index: 50;
+      background: var(--nav);
+      backdrop-filter: blur(15px);
       border-bottom: 1px solid var(--border);
     }
 
-    .nav-inner {
-      min-height: 72px;
+    .nav {
+      min-height: 66px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
     }
 
     .logo {
       font-size: 21px;
       font-weight: 800;
-      letter-spacing: -0.7px;
+      letter-spacing: -1px;
       white-space: nowrap;
     }
 
@@ -90,17 +107,21 @@
       color: var(--accent);
     }
 
-    .nav-links {
+    .nav-right {
       display: flex;
       align-items: center;
-      gap: 27px;
+      gap: 25px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
       list-style: none;
     }
 
     .nav-links a {
+      font-size: 14px;
       color: var(--muted);
-      font-size: 13px;
-      transition: color 0.2s;
     }
 
     .nav-links a:hover,
@@ -108,37 +129,41 @@
       color: var(--accent);
     }
 
-    .menu-toggle {
-      display: none;
-      background: transparent;
-      color: var(--text);
+    .theme-btn,
+    .menu-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
       border: 1px solid var(--border);
-      padding: 7px 11px;
-      border-radius: 8px;
-      font-size: 20px;
-      cursor: pointer;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 18px;
     }
 
-    /* HOME */
+    .menu-btn {
+      display: none;
+    }
+
+    /* HOME: TEXT AND TERMINAL ONLY */
+
     .hero {
-      min-height: 510px;
-      display: flex;
-      align-items: center;
-      padding: 95px 0 105px;
+      position: relative;
+      padding: 90px 0 80px;
+      border-bottom: 1px solid var(--border);
       background:
-        radial-gradient(ellipse at 80% 20%,
-          rgba(69, 224, 176, 0.09), transparent 38%);
+        radial-gradient(ellipse at 75% 10%,
+          rgba(97, 155, 255, .10), transparent 38%);
     }
 
-    .hero-content {
-      max-width: 780px;
+    .hero-inner {
+      max-width: 850px;
     }
 
     .eyebrow {
       display: inline-flex;
+      gap: 9px;
       align-items: center;
-      gap: 10px;
-      padding: 7px 13px;
+      padding: 6px 12px;
       border: 1px solid var(--border);
       border-radius: 30px;
       color: var(--muted);
@@ -146,138 +171,234 @@
       margin-bottom: 23px;
     }
 
-    .eyebrow-dot {
+    .green-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--green);
+      display: inline-block;
+      flex-shrink: 0;
     }
 
     .hero h1 {
-      font-size: clamp(39px, 6.2vw, 68px);
-      line-height: 1.12;
-      letter-spacing: -2.3px;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -2.8px;
       margin-bottom: 22px;
     }
 
-    .hero h1 .accent {
-      display: block;
+    .gradient-text {
+      background: linear-gradient(100deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .hero-description {
-      max-width: 620px;
       color: var(--muted);
+      max-width: 700px;
       font-size: 16px;
       line-height: 1.9;
-      margin-bottom: 29px;
+      margin-bottom: 26px;
     }
 
-    .button-row {
+    .buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      margin-bottom: 30px;
     }
 
-    .button {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 9px;
+      padding: 11px 17px;
       min-height: 44px;
-      padding: 11px 18px;
+      border-radius: 11px;
       border: 1px solid var(--border);
-      border-radius: 9px;
-      font-size: 13px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
       font-weight: 700;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform .2s, border-color .2s;
     }
 
-    .button:hover {
+    .btn:hover {
       transform: translateY(-2px);
       border-color: var(--accent);
     }
 
-    .button-primary {
-      background: var(--accent);
-      color: #071b16;
+    .btn-primary {
+      color: #fff;
+      border: none;
+      background: linear-gradient(110deg, #3267ee, #8137eb);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.12);
+    }
+
+    /* INTERACTIVE TERMINAL */
+
+    .terminal {
+      max-width: 750px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 30px;
+    }
+
+    .terminal-head {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dots span {
+      width: 10px;
+      height: 10px;
+      background: #64748b;
+      border-radius: 50%;
+    }
+
+    .terminal-title {
+      color: var(--muted);
+      font: 12px monospace;
+    }
+
+    .terminal-body {
+      padding: 18px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+    }
+
+    .terminal-output {
+      min-height: 76px;
+      color: var(--muted);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      margin-bottom: 15px;
+    }
+
+    .terminal-output .prompt {
+      color: var(--green);
+    }
+
+    .terminal-form {
+      display: flex;
+      gap: 9px;
+    }
+
+    .terminal-form input {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+    }
+
+    .terminal-form input:focus {
       border-color: var(--accent);
     }
 
-    .button-primary:hover {
-      background: #75f0cb;
+    .terminal-form button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #071323;
+      font-weight: 800;
     }
 
-    /* GENERAL SECTION STYLES */
+    /* SHARED SECTIONS */
+
     .section {
-      padding: 83px 0;
-      border-top: 1px solid rgba(164, 175, 197, 0.08);
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
     }
 
     .section-heading {
-      margin-bottom: 38px;
+      margin-bottom: 36px;
     }
 
-    .section-kicker {
+    .kicker {
       color: var(--accent);
-      text-transform: uppercase;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 2.3px;
-      margin-bottom: 9px;
+      letter-spacing: 2.5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
     .section-heading h2 {
-      font-size: clamp(29px, 4vw, 39px);
+      font-size: clamp(30px, 4vw, 42px);
       line-height: 1.3;
-      letter-spacing: -0.8px;
       margin-bottom: 10px;
+      letter-spacing: -1px;
     }
 
     .section-heading > p:last-child {
       color: var(--muted);
       font-size: 14px;
-      max-width: 620px;
+      max-width: 650px;
     }
 
-    /* ABOUT: SMALL PHOTO + TEXT */
+    /* ABOUT: PHOTO ONLY HERE */
+
     .about-grid {
       display: grid;
-      grid-template-columns: 190px minmax(0, 1fr);
+      grid-template-columns: 150px minmax(0, 1fr);
       align-items: start;
-      gap: 38px;
+      gap: 35px;
     }
 
-    .profile-column {
-      width: 100%;
-      max-width: 190px;
+    .about-photo-wrap {
+      width: 150px;
+      max-width: 100%;
     }
 
-    .profile-frame {
-      padding: 6px;
-      border: 1px solid rgba(69, 224, 176, 0.45);
-      border-radius: 17px;
+    .about-photo-frame {
+      padding: 4px;
+      border: 1px solid rgba(97, 155, 255, .55);
+      border-radius: 14px;
       background: var(--surface);
+      box-shadow: 0 8px 30px rgba(70, 100, 180, .12);
     }
 
-    .profile-photo {
+    .about-photo {
       display: block;
       width: 100%;
-      aspect-ratio: 4 / 5;
+      height: 185px;
       object-fit: cover;
       object-position: center top;
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
-    .profile-note {
+    .photo-caption {
       color: var(--muted);
-      font-size: 11px;
       text-align: center;
-      margin-top: 11px;
+      font-size: 10px;
+      margin-top: 9px;
     }
 
     .about-copy h3 {
-      font-size: 25px;
-      line-height: 1.4;
+      font-size: 24px;
+      line-height: 1.45;
       margin-bottom: 14px;
     }
 
@@ -287,34 +408,34 @@
       margin-bottom: 13px;
     }
 
-    .about-facts {
+    .about-details {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
-      margin-top: 24px;
+      margin-top: 23px;
     }
 
-    .fact {
-      padding: 14px 15px;
-      background: var(--surface);
+    .detail-card {
+      padding: 14px;
       border: 1px solid var(--border);
       border-radius: 10px;
+      background: var(--surface);
     }
 
-    .fact-label {
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .fact-value {
-      color: var(--text);
+    .detail-card strong {
+      display: block;
       font-size: 12px;
-      overflow-wrap: anywhere;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .detail-card span {
+      font-size: 12px;
+      color: var(--muted);
     }
 
     /* SKILLS */
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -324,19 +445,20 @@
     .skill-card {
       padding: 20px;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 13px;
       background: var(--surface);
-      transition: border-color 0.2s, transform 0.2s;
+      transition: transform .2s, border-color .2s;
     }
 
-    .skill-card:hover {
-      border-color: rgba(69, 224, 176, 0.55);
+    .skill-card:hover,
+    .project-card:hover {
       transform: translateY(-3px);
+      border-color: var(--accent);
     }
 
     .skill-icon {
       font-size: 22px;
-      margin-bottom: 12px;
+      margin-bottom: 9px;
     }
 
     .skill-card h3 {
@@ -345,60 +467,76 @@
     }
 
     .skill-card p {
-      color: var(--muted);
       font-size: 12px;
+      color: var(--muted);
       line-height: 1.8;
     }
 
-    .learning-note {
-      margin-top: 19px;
+    /* PROJECTS */
+
+    .project-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 23px;
+    }
+
+    .filter-btn {
+      padding: 8px 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
       color: var(--muted);
       font-size: 12px;
     }
 
-    /* PROJECTS */
+    .filter-btn.active {
+      background: var(--accent);
+      color: #071323;
+      border-color: var(--accent);
+      font-weight: 800;
+    }
+
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 17px;
+      gap: 16px;
     }
 
     .project-card {
-      padding: 23px;
+      padding: 22px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 13px;
       display: flex;
       flex-direction: column;
       min-height: 220px;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: transform .2s, border-color .2s;
     }
 
-    .project-card:hover {
-      border-color: rgba(69, 224, 176, 0.55);
-      transform: translateY(-3px);
+    .project-card[hidden] {
+      display: none;
     }
 
-    .project-top {
+    .project-meta {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 15px;
     }
 
     .project-number {
       color: var(--accent);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
     }
 
     .project-status {
       color: var(--muted);
-      font-size: 10px;
       border: 1px solid var(--border);
-      padding: 4px 8px;
       border-radius: 20px;
+      padding: 3px 8px;
+      font-size: 10px;
     }
 
     .project-card h3 {
@@ -410,7 +548,7 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.8;
-      margin-bottom: 17px;
+      margin-bottom: 16px;
     }
 
     .tags {
@@ -422,18 +560,15 @@
     }
 
     .tag {
-      color: #b8f6e2;
-      background: rgba(69, 224, 176, 0.08);
-      border: 1px solid rgba(69, 224, 176, 0.15);
+      color: var(--green);
+      background: rgba(66, 230, 164, .07);
+      border: 1px solid rgba(66, 230, 164, .15);
       padding: 4px 8px;
       border-radius: 5px;
       font-size: 10px;
     }
 
     .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
       color: var(--accent);
       font-size: 12px;
       font-weight: 700;
@@ -445,50 +580,46 @@
     }
 
     /* CONTACT */
-    .contact-panel {
-      background:
-        radial-gradient(ellipse at top right,
-          rgba(69, 224, 176, 0.08), transparent 50%),
-        var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 35px;
+
+    .contact-box {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 25px;
+      padding: 30px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
     }
 
-    .contact-panel h3 {
-      font-size: 23px;
-      margin-bottom: 9px;
+    .contact-box h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
     }
 
-    .contact-panel p {
-      max-width: 570px;
+    .contact-box p {
       color: var(--muted);
       font-size: 13px;
+      max-width: 580px;
     }
 
-    .contact-links {
+    .contact-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      flex-shrink: 0;
+      gap: 9px;
     }
 
     /* FOOTER */
+
     footer {
-      border-top: 1px solid var(--border);
-      padding: 23px 0;
+      padding: 22px 0;
     }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 15px;
       flex-wrap: wrap;
+      gap: 12px;
     }
 
     footer p,
@@ -501,55 +632,25 @@
       color: var(--accent);
     }
 
-    /* TABLET AND MOBILE */
-    @media (max-width: 800px) {
-      .nav-links {
-        gap: 15px;
+    @media (max-width: 760px) {
+      .nav-right {
+        gap: 10px;
       }
 
-      .about-grid {
-        grid-template-columns: 155px minmax(0, 1fr);
-        gap: 25px;
-      }
-
-      .profile-column {
-        max-width: 155px;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .contact-panel {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        width: 90%;
-      }
-
-      .nav-inner {
-        min-height: 64px;
-      }
-
-      .menu-toggle {
+      .menu-btn {
         display: block;
       }
 
       .nav-links {
         display: none;
         position: absolute;
-        top: 64px;
+        top: 66px;
         left: 0;
         right: 0;
-        padding: 15px 5% 20px;
-        background: #0b1020;
+        background: var(--bg);
         border-bottom: 1px solid var(--border);
+        padding: 14px 6%;
         flex-direction: column;
-        align-items: stretch;
         gap: 0;
       }
 
@@ -559,81 +660,86 @@
 
       .nav-links a {
         display: block;
-        padding: 11px 0;
+        padding: 9px 0;
       }
 
       .hero {
-        min-height: auto;
-        padding: 75px 0 80px;
+        padding: 70px 0;
       }
 
       .hero h1 {
         letter-spacing: -1.5px;
       }
 
-      .hero-description {
-        font-size: 14px;
+      .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .about-grid {
+        grid-template-columns: 125px minmax(0, 1fr);
+        gap: 22px;
+      }
+
+      .about-photo-wrap {
+        width: 125px;
+      }
+
+      .about-photo {
+        height: 155px;
+      }
+
+      .contact-box {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: 90%;
       }
 
       .section {
-        padding: 65px 0;
+        padding: 60px 0;
       }
 
       .about-grid {
         grid-template-columns: 1fr;
-        gap: 27px;
+        gap: 23px;
       }
 
-      .profile-column {
-        max-width: 125px;
-        margin: 0 auto;
+      .about-photo-wrap {
+        width: 112px;
       }
 
-      .profile-frame {
-        padding: 4px;
-        border-radius: 13px;
+      .about-photo {
+        height: 140px;
       }
 
-      .profile-photo {
-        border-radius: 9px;
-      }
-
-      .profile-note {
-        font-size: 10px;
-      }
-
-      .about-copy h3 {
-        font-size: 22px;
-      }
-
-      .about-facts {
-        grid-template-columns: 1fr;
-      }
-
+      .about-details,
       .skills-grid,
       .projects-grid {
         grid-template-columns: 1fr;
       }
 
-      .skill-card {
-        padding: 18px;
+      .terminal-body {
+        padding: 12px;
       }
 
-      .project-card {
-        min-height: 0;
+      .terminal-form {
+        gap: 7px;
       }
 
-      .contact-panel {
-        padding: 23px;
+      .terminal-form button {
+        padding: 9px 12px;
       }
 
-      .contact-panel h3 {
-        font-size: 21px;
+      .contact-box {
+        padding: 22px;
       }
 
       .footer-inner {
         flex-direction: column;
-        align-items: flex-start;
       }
     }
 
@@ -643,7 +749,7 @@
       }
 
       *, *::before, *::after {
-        transition-duration: 0.01ms !important;
+        transition: none !important;
       }
     }
   </style>
@@ -651,125 +757,144 @@
 
 <body>
   <!-- NAVIGATION -->
-  <header class="navbar">
-    <nav class="container nav-inner" aria-label="Main navigation">
-      <a class="logo" href="#home">lakshmi<span>.</span></a>
+  <header>
+    <nav class="container nav" aria-label="Main navigation">
+      <a href="#home" class="logo">lakshmi<span>.dev</span></a>
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        type="button"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        aria-controls="navLinks"
-      >☰</button>
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#terminal">Terminal</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+        <button class="theme-btn" id="themeToggle"
+          type="button" aria-label="Toggle color theme">☾</button>
+
+        <button class="menu-btn" id="menuToggle"
+          type="button" aria-label="Open navigation"
+          aria-expanded="false">☰</button>
+      </div>
     </nav>
   </header>
 
   <main>
-    <!-- HOME: NO LARGE PHOTO HERE -->
+    <!-- HOME: PHOTO REMOVED COMPLETELY -->
     <section class="hero" id="home">
-      <div class="container hero-content">
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          DevOps · Cloud · Automation
+      <div class="container">
+        <div class="hero-inner">
+          <div class="eyebrow">
+            <span class="green-dot"></span>
+            DevOps · Cloud · Automation
+          </div>
+
+          <h1>
+            Hi, I'm Lakshmi<br>
+            <span class="gradient-text">Kumari.</span>
+          </h1>
+
+          <p class="hero-description">
+            Computer Science graduate exploring DevOps, cloud infrastructure,
+            automation, and CI/CD. I'm learning how applications move from code
+            to deployment and how systems can run more reliably.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" href="#projects">
+              ◫ Explore projects
+            </a>
+            <a class="btn" href="#contact">➤ Contact me</a>
+            <a class="btn" href="https://github.com/lakshmikumari-123"
+              target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </div>
         </div>
 
-        <h1>
-          Hi, I'm Lakshmi Kumari.
-          <span class="accent">Building my DevOps journey.</span>
-        </h1>
+        <!-- Interactive simulated terminal -->
+        <div class="terminal" id="terminal">
+          <div class="terminal-head">
+            <div class="terminal-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="terminal-title">lakshmi@portfolio:~</span>
+            <span>›_</span>
+          </div>
 
-        <p class="hero-description">
-          A Computer Science graduate interested in cloud technologies,
-          automation, and reliable deployments. Exploring DevOps tools
-          and building practical projects one step at a time.
-        </p>
+          <div class="terminal-body">
+            <div class="terminal-output" id="terminalOutput"><span class="prompt">$ help</span>
+Try: about, skills, projects, github, clear</div>
 
-        <div class="button-row">
-          <a class="button button-primary" href="#projects">
-            Explore Projects <span>→</span>
-          </a>
-          <a
-            class="button"
-            href="https://github.com/lakshmikumari-123"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub ↗
-          </a>
+            <form class="terminal-form" id="terminalForm">
+              <input id="terminalInput" type="text"
+                placeholder="Type a command..."
+                aria-label="Terminal command" autocomplete="off">
+              <button type="submit">Run</button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT: SMALL PHOTO IS ONLY HERE -->
+    <!-- ABOUT: SMALL PHOTO ONLY HERE -->
     <section class="section" id="about">
       <div class="container">
         <div class="section-heading">
-          <p class="section-kicker">Get to know me</p>
-          <h2>About <span class="accent">Me</span></h2>
-          <p>A little about my background, interests, and learning journey.</p>
+          <p class="kicker">Get to know me</p>
+          <h2>About <span class="gradient-text">Me</span></h2>
+          <p>A little about my journey into DevOps and cloud technology.</p>
         </div>
 
         <div class="about-grid">
-          <div class="profile-column">
-            <div class="profile-frame">
+          <div class="about-photo-wrap">
+            <div class="about-photo-frame">
               <img
-                class="profile-photo"
+                class="about-photo"
                 src="profile.jpg"
-                alt="Lakshmi Kumari's profile photo"
+                alt="Lakshmi Kumari"
                 onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='assets/profile.jpg';}"
               >
             </div>
-            <p class="profile-note">Learning · Building · Improving</p>
+            <p class="photo-caption">DevOps & Cloud Learner</p>
           </div>
 
           <div class="about-copy">
             <h3>
-              Hello! I'm a CSE graduate
-              <span class="accent">exploring DevOps.</span>
+              Learning, building, and improving
+              <span class="accent">every day.</span>
             </h3>
 
             <p>
-              I am interested in automating workflows, understanding
-              cloud infrastructure, and learning how applications are
-              built, tested, and deployed.
+              I'm a Computer Science graduate interested in automation,
+              cloud infrastructure, and reliable software delivery.
             </p>
 
             <p>
-              I have been learning tools such as Linux, Git, Docker,
-              GitHub Actions, and AWS through guided practice and
-              portfolio projects. I aim to keep improving my practical
-              skills and problem-solving ability.
+              I'm developing my skills through hands-on learning with Linux,
+              Git, Docker, GitHub Actions, and AWS. I enjoy understanding how
+              applications are built, tested, deployed, and maintained.
             </p>
 
-            <div class="about-facts">
-              <div class="fact">
-                <p class="fact-label">EDUCATION</p>
-                <p class="fact-value">B.Tech, Computer Science</p>
+            <div class="about-details">
+              <div class="detail-card">
+                <strong>EDUCATION</strong>
+                <span>B.Tech in Computer Science</span>
               </div>
 
-              <div class="fact">
-                <p class="fact-label">INTEREST</p>
-                <p class="fact-value">DevOps & Cloud Computing</p>
+              <div class="detail-card">
+                <strong>AREAS OF INTEREST</strong>
+                <span>DevOps and Cloud Computing</span>
               </div>
 
-              <div class="fact">
-                <p class="fact-label">CURRENT LEARNING</p>
-                <p class="fact-value">CI/CD and deployment workflows</p>
+              <div class="detail-card">
+                <strong>TOOLS</strong>
+                <span>Linux, Git, Docker, AWS</span>
               </div>
 
-              <div class="fact">
-                <p class="fact-label">ALSO FAMILIAR WITH</p>
-                <p class="fact-value">Java, SQL and REST APIs</p>
+              <div class="detail-card">
+                <strong>PROGRAMMING</strong>
+                <span>Java, SQL, REST APIs</span>
               </div>
             </div>
           </div>
@@ -781,52 +906,48 @@
     <section class="section" id="skills">
       <div class="container">
         <div class="section-heading">
-          <p class="section-kicker">What I'm learning</p>
-          <h2>Skills & <span class="accent">Tools</span></h2>
-          <p>Technologies I am studying and practising in my DevOps journey.</p>
+          <p class="kicker">My toolkit</p>
+          <h2>Skills & <span class="gradient-text">Technologies</span></h2>
+          <p>Technologies I am learning and practising in my projects.</p>
         </div>
 
         <div class="skills-grid">
           <article class="skill-card">
-            <div class="skill-icon">🐧</div>
+            <div class="skill-icon">⌘</div>
             <h3>Linux</h3>
-            <p>Command-line basics, files, permissions, processes, and logs.</p>
+            <p>Command-line basics, file permissions, processes, and logs.</p>
           </article>
 
           <article class="skill-card">
-            <div class="skill-icon">🌿</div>
+            <div class="skill-icon">⑂</div>
             <h3>Git & GitHub</h3>
-            <p>Version control, repositories, commits, branches, and collaboration.</p>
+            <p>Version control, repositories, commits, and collaboration.</p>
           </article>
 
           <article class="skill-card">
-            <div class="skill-icon">🐳</div>
+            <div class="skill-icon">▣</div>
             <h3>Docker</h3>
-            <p>Container basics, Dockerfiles, images, and application packaging.</p>
+            <p>Containers, images, Dockerfiles, and application packaging.</p>
           </article>
 
           <article class="skill-card">
-            <div class="skill-icon">⚙️</div>
+            <div class="skill-icon">⚙</div>
             <h3>GitHub Actions</h3>
             <p>Workflow configuration and automated build pipelines.</p>
           </article>
 
           <article class="skill-card">
-            <div class="skill-icon">☁️</div>
+            <div class="skill-icon">☁</div>
             <h3>AWS</h3>
-            <p>Learning cloud services, access management, networking, and storage.</p>
+            <p>Learning cloud services, IAM, storage, and networking.</p>
           </article>
 
           <article class="skill-card">
-            <div class="skill-icon">💻</div>
+            <div class="skill-icon">⌨</div>
             <h3>Java & SQL</h3>
             <p>Programming fundamentals, database queries, and REST API concepts.</p>
           </article>
         </div>
-
-        <p class="learning-note">
-          This section reflects my learning areas; experience levels may vary by tool.
-        </p>
       </div>
     </section>
 
@@ -834,95 +955,90 @@
     <section class="section" id="projects">
       <div class="container">
         <div class="section-heading">
-          <p class="section-kicker">Things I'm building</p>
-          <h2>My <span class="accent">Projects</span></h2>
-          <p>A selection of my portfolio work and DevOps practice.</p>
+          <p class="kicker">My work</p>
+          <h2>Featured <span class="gradient-text">Projects</span></h2>
+          <p>Portfolio work and learning projects related to DevOps.</p>
+        </div>
+
+        <div class="project-filters" aria-label="Filter projects">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="devops">DevOps</button>
+          <button class="filter-btn" data-filter="cloud">Cloud</button>
+          <button class="filter-btn" data-filter="web">Web</button>
         </div>
 
         <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-top">
+          <article class="project-card" data-category="web devops">
+            <div class="project-meta">
               <span class="project-number">PROJECT 01</span>
               <span class="project-status">Portfolio</span>
             </div>
-
             <h3>DevOps Portfolio Website</h3>
             <p>
-              A responsive personal website hosted through GitHub,
-              presenting my background, technical interests, and projects.
+              A responsive portfolio website presenting my skills,
+              learning journey, and project work.
             </p>
-
             <div class="tags">
               <span class="tag">HTML</span>
               <span class="tag">CSS</span>
-              <span class="tag">GitHub</span>
+              <span class="tag">GitHub Pages</span>
             </div>
-
-            <a
-              class="project-link"
+            <a class="project-link"
               href="https://github.com/lakshmikumari-123/my-frst-website"
-              target="_blank"
-              rel="noopener noreferrer"
-            >View Repository ↗</a>
+              target="_blank" rel="noopener noreferrer">
+              View repository ↗
+            </a>
           </article>
 
-          <article class="project-card">
-            <div class="project-top">
+          <article class="project-card" data-category="devops">
+            <div class="project-meta">
               <span class="project-number">PROJECT 02</span>
-              <span class="project-status">CI/CD Practice</span>
+              <span class="project-status">CI/CD</span>
             </div>
-
             <h3>Docker & GitHub Actions</h3>
             <p>
-              A portfolio deployment practice project using a Dockerfile
-              and a GitHub Actions workflow to automate the image build.
+              Practice project using Docker and a GitHub Actions workflow
+              to automate building a container image.
             </p>
-
             <div class="tags">
               <span class="tag">Docker</span>
               <span class="tag">GitHub Actions</span>
               <span class="tag">CI/CD</span>
             </div>
-
-            <a
-              class="project-link"
+            <a class="project-link"
               href="https://github.com/lakshmikumari-123/my-frst-website"
-              target="_blank"
-              rel="noopener noreferrer"
-            >View Repository ↗</a>
+              target="_blank" rel="noopener noreferrer">
+              View repository ↗
+            </a>
           </article>
 
-          <article class="project-card">
-            <div class="project-top">
+          <article class="project-card" data-category="devops">
+            <div class="project-meta">
               <span class="project-number">PROJECT 03</span>
               <span class="project-status">Learning</span>
             </div>
-
-            <h3>Linux Administration Practice</h3>
+            <h3>Linux Administration</h3>
             <p>
-              Learning command-line operations, file permissions,
-              process inspection, and basic troubleshooting techniques.
+              Learning command-line operations, permissions, process
+              inspection, and basic troubleshooting.
             </p>
-
             <div class="tags">
               <span class="tag">Linux</span>
-              <span class="tag">Shell Commands</span>
+              <span class="tag">Commands</span>
               <span class="tag">Troubleshooting</span>
             </div>
           </article>
 
-          <article class="project-card">
-            <div class="project-top">
+          <article class="project-card" data-category="cloud">
+            <div class="project-meta">
               <span class="project-number">PROJECT 04</span>
               <span class="project-status">Learning</span>
             </div>
-
             <h3>AWS Cloud Fundamentals</h3>
             <p>
-              Learning cloud infrastructure concepts, IAM permissions,
-              S3 storage, networking, and security basics.
+              Learning IAM permissions, S3 storage, cloud networking,
+              and infrastructure security fundamentals.
             </p>
-
             <div class="tags">
               <span class="tag">AWS</span>
               <span class="tag">IAM</span>
@@ -937,41 +1053,37 @@
     <section class="section" id="contact">
       <div class="container">
         <div class="section-heading">
-          <p class="section-kicker">Let's connect</p>
-          <h2>Contact <span class="accent">Me</span></h2>
-          <p>Interested in my work? Feel free to connect with me.</p>
+          <p class="kicker">Get in touch</p>
+          <h2>Let's <span class="gradient-text">Connect</span></h2>
+          <p>Feel free to explore my work and connect with me.</p>
         </div>
 
-        <div class="contact-panel">
+        <div class="contact-box">
           <div>
-            <h3>Let's build and learn together.</h3>
+            <h3>Have an opportunity or idea?</h3>
             <p>
               I'm interested in learning opportunities, DevOps projects,
-              and connecting with people in the technology community.
+              and connecting with people in technology.
             </p>
           </div>
 
-          <div class="contact-links">
-            <a
-              class="button button-primary"
+          <div class="contact-actions">
+            <a class="btn btn-primary"
               href="https://github.com/lakshmikumari-123"
-              target="_blank"
-              rel="noopener noreferrer"
-            >GitHub ↗</a>
-
-            <a
-              class="button"
+              target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </a>
+            <a class="btn"
               href="https://www.linkedin.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >LinkedIn ↗</a>
+              target="_blank" rel="noopener noreferrer">
+              LinkedIn ↗
+            </a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
       <p>© <span id="year"></span> Lakshmi Kumari. Built with care.</p>
@@ -984,22 +1096,105 @@
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
 
-    menuToggle.addEventListener("click", function () {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.textContent = isOpen ? "✕" : "☰";
+    menuToggle.addEventListener("click", () => {
+      const opened = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(opened));
+      menuToggle.textContent = opened ? "✕" : "☰";
     });
 
-    // Close the mobile menu after selecting a section
-    navLinks.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
         navLinks.classList.remove("open");
         menuToggle.setAttribute("aria-expanded", "false");
         menuToggle.textContent = "☰";
       });
     });
 
-    // Automatically update the footer year
+    // Light/dark theme toggle
+    const themeToggle = document.getElementById("themeToggle");
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      const light = document.body.classList.contains("light");
+      themeToggle.textContent = light ? "☀" : "☾";
+      themeToggle.setAttribute(
+        "aria-label",
+        light ? "Switch to dark theme" : "Switch to light theme"
+      );
+    });
+
+    // Interactive simulated terminal: safe, predefined commands only
+    const terminalForm = document.getElementById("terminalForm");
+    const terminalInput = document.getElementById("terminalInput");
+    const terminalOutput = document.getElementById("terminalOutput");
+
+    const commands = {
+      help: "Available commands: about, skills, projects, github, clear",
+      about: "I'm Lakshmi Kumari, a Computer Science graduate exploring DevOps and cloud technologies.",
+      skills: "Learning areas: Linux, Git, Docker, GitHub Actions, AWS, Java, SQL.",
+      projects: "Explore the Projects section to see my portfolio and learning projects.",
+      github: "Open: https://github.com/lakshmikumari-123",
+      clear: ""
+    };
+
+    terminalForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const command = terminalInput.value.trim().toLowerCase();
+
+      if (!command) return;
+
+      if (command === "clear") {
+        terminalOutput.textContent = "";
+        terminalInput.value = "";
+        return;
+      }
+
+      const result = commands[command] ||
+        "Command not found. Type 'help' to see available commands.";
+
+      terminalOutput.textContent = "$ " + command + "\n" + result;
+      terminalInput.value = "";
+    });
+
+    // Project category filters
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+
+        projectCards.forEach(card => {
+          const categories = card.dataset.category.split(" ");
+          card.hidden = filter !== "all" && !categories.includes(filter);
+        });
+      });
+    });
+
+    // Highlight the current navigation section
+    const sections = document.querySelectorAll("main section[id]");
+    const navItems = document.querySelectorAll(".nav-links a");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navItems.forEach(link => {
+              link.classList.toggle(
+                "active",
+                link.getAttribute("href") === "#" + entry.target.id
+              );
+            });
+          }
+        });
+      }, { rootMargin: "-25% 0px -60% 0px" });
+
+      sections.forEach(section => observer.observe(section));
+    }
+
     document.getElementById("year").textContent =
       new Date().getFullYear();
   </script>
