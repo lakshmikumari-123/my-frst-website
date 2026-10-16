@@ -4,798 +4,1004 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b14">
-  <meta name="description" content="Lakshmi Kumari's DevOps portfolio, projects, and technical learning journey.">
-  <title>Lakshmi Kumari | DevOps Portfolio</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="DevOps portfolio showcasing skills, projects, and learning journey.">
+  <title>DevOps Portfolio | Lakshmi Kumari</title>
 
   <style>
     :root {
-      --bg: #080b14;
-      --surface: #101522;
-      --surface2: #171e30;
+      --bg: #0b1020;
+      --surface: #111a2e;
+      --surface-light: #172239;
       --text: #edf2ff;
-      --muted: #9ba7bd;
-      --line: rgba(148,163,184,.18);
-      --accent: #60a5fa;
-      --purple: #a78bfa;
-      --green: #4ade80;
-      --header: rgba(8,11,20,.86);
+      --muted: #a4afc5;
+      --accent: #45e0b0;
+      --border: rgba(164, 175, 197, 0.16);
+      --max-width: 1080px;
     }
 
-    body.light {
-      --bg: #f5f7fc;
-      --surface: #fff;
-      --surface2: #eaf0fa;
-      --text: #182238;
-      --muted: #59677f;
-      --line: rgba(51,65,85,.17);
-      --accent: #2563eb;
-      --purple: #7c3aed;
-      --green: #15803d;
-      --header: rgba(245,247,252,.88);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
     body {
-      background: var(--bg); color: var(--text);
-      font-family: Inter, sans-serif; line-height: 1.7;
-      overflow-x: hidden; transition: background .25s, color .25s;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
     }
-    a { text-decoration: none; color: inherit; }
-    button, input, textarea { font: inherit; }
-    button { cursor: pointer; }
-    .container { width: min(1100px, 91%); margin: auto; }
-    .mono { font-family: "JetBrains Mono", monospace; }
-    .muted { color: var(--muted); }
-    .gradient {
-      background: linear-gradient(100deg,var(--accent),var(--purple));
-      color: transparent; background-clip: text; -webkit-background-clip: text;
-    }
-    svg { width: 19px; height: 19px; }
-    #progress {
-      position: fixed; top: 0; left: 0; width: 0; height: 3px;
-      background: linear-gradient(90deg,var(--accent),var(--purple));
-      z-index: 1001;
-    }
-    #particles { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
 
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--header); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    .nav {
-      min-height: 70px; display: flex; align-items: center;
-      justify-content: space-between; gap: 16px;
-    }
-    .logo { font-weight: 800; font-size: 1.12rem; letter-spacing: -.6px; }
-    .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 22px; align-items: center; }
-    .nav-links a { color: var(--muted); font-size: .85rem; }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-    .nav-actions { display: flex; gap: 8px; }
-    .icon-btn {
-      display: grid; place-items: center; width: 40px; height: 40px;
-      color: var(--text); background: var(--surface);
-      border: 1px solid var(--line); border-radius: 11px;
-    }
-    #menuBtn { display: none; }
 
-    .hero { padding: 85px 0 65px; min-height: 80vh; display: flex; align-items: center; }
-    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 55px; align-items: center; }
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(var(--max-width), 88%);
+      margin: 0 auto;
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 16, 32, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.7px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* HOME */
+    .hero {
+      min-height: 510px;
+      display: flex;
+      align-items: center;
+      padding: 95px 0 105px;
+      background:
+        radial-gradient(ellipse at 80% 20%,
+          rgba(69, 224, 176, 0.09), transparent 38%);
+    }
+
+    .hero-content {
+      max-width: 780px;
+    }
+
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 9px;
-      border: 1px solid var(--line); background: var(--surface);
-      padding: 7px 12px; border-radius: 99px;
-      color: var(--green); font: .76rem "JetBrains Mono",monospace;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 13px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 23px;
     }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
-    h1 { font-size: clamp(2.8rem,6vw,4.8rem); line-height: 1.1; letter-spacing: -3px; margin: 22px 0 12px; }
-    .typed-line { color: var(--accent); min-height: 32px; font: 500 1rem "JetBrains Mono",monospace; }
-    .hero-copy { color: var(--muted); margin: 20px 0 26px; max-width: 580px; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      border: 1px solid var(--line); border-radius: 11px;
-      padding: 11px 15px; color: var(--text); background: var(--surface);
-      font-size: .87rem; font-weight: 600;
-      transition: transform .2s,border-color .2s,box-shadow .2s;
-    }
-    .btn:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 28px #3b82f622; }
-    .btn.primary { color: white; border-color: transparent; background: linear-gradient(110deg,#2563eb,#7c3aed); }
 
-    .photo-wrap { width: min(330px,100%); margin: auto; position: relative; }
-    .photo-glow {
-      position: absolute; inset: -4px; border-radius: 25px;
-      background: conic-gradient(var(--accent),var(--purple),#34d399,var(--accent));
-      filter: blur(12px); opacity: .65;
-      animation: hue 7s linear infinite;
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
     }
-    @keyframes hue { to { filter: hue-rotate(360deg) blur(12px); } }
-    .photo-card {
-      position: relative; overflow: hidden; padding: 9px;
-      border-radius: 23px; background: var(--surface); border: 1px solid var(--line);
-      transition: transform .2s;
-    }
-    .photo-card img {
-      display: block; width: 100%; height: 365px; object-fit: cover;
-      object-position: center 25%; border-radius: 15px; background: var(--surface2);
-    }
-    .photo-caption { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 13px 7px 7px; }
-    .photo-caption strong { display: block; font-size: .92rem; }
-    .photo-caption small { color: var(--muted); }
-    .status { color: var(--green); font: .7rem "JetBrains Mono",monospace; }
 
-    section { padding: 75px 0; }
-    .kicker { color: var(--accent); font: .78rem "JetBrains Mono",monospace; margin-bottom: 8px; }
-    h2 { font-size: clamp(1.9rem,4vw,2.7rem); letter-spacing: -1.2px; line-height: 1.25; }
-    .section-desc { color: var(--muted); max-width: 650px; margin-top: 10px; }
-    .section-head { margin-bottom: 28px; }
-
-    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 25px; }
-    .stat { padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-    .stat strong { display: block; font-size: 1.55rem; color: var(--accent); }
-    .stat span { color: var(--muted); font-size: .82rem; }
-
-    .skills { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; }
-    .skill, .project, .journey-card, .contact-card {
-      background: var(--surface); border: 1px solid var(--line);
-      border-radius: 15px; transition: transform .23s,border-color .23s;
+    .hero h1 {
+      font-size: clamp(39px, 6.2vw, 68px);
+      line-height: 1.12;
+      letter-spacing: -2.3px;
+      margin-bottom: 22px;
     }
-    .skill { padding: 19px; }
-    .skill:hover, .project:hover, .journey-card:hover, .contact-card:hover {
-      transform: translateY(-5px); border-color: var(--accent);
-    }
-    .skill-icon, .project-icon, .journey-icon {
-      display: grid; place-items: center; width: 43px; height: 43px;
-      background: var(--surface2); border-radius: 12px; color: var(--accent); margin-bottom: 13px;
-    }
-    .skill h3 { font-size: .94rem; }
-    .skill p { color: var(--muted); font-size: .79rem; margin-top: 5px; }
 
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-    .filter {
-      border: 1px solid var(--line); background: var(--surface);
-      color: var(--muted); padding: 8px 13px; border-radius: 99px; font-size: .82rem;
+    .hero h1 .accent {
+      display: block;
     }
-    .filter.active, .filter:hover { background: #2563eb; border-color: #2563eb; color: white; }
-    .projects { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
-    .project { padding: 22px; }
-    .project-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
-    .project-icon { margin: 0; }
-    .project-type { color: var(--muted); font: .7rem "JetBrains Mono",monospace; }
-    .project h3 { font-size: 1.08rem; margin-bottom: 7px; }
-    .project p { color: var(--muted); font-size: .87rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
-    .tag { padding: 4px 8px; border-radius: 6px; background: var(--surface2); color: var(--accent); font: .7rem "JetBrains Mono",monospace; }
-    .project-links { display: flex; gap: 13px; margin-top: 18px; }
-    .project-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: .83rem; }
-    .project-links svg { width: 15px; }
-    .project[hidden] { display: none; }
 
-    .terminal { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; overflow: hidden; margin-top: 27px; }
-    .terminal-head { padding: 11px 14px; background: var(--surface2); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
-    .terminal-dots { display: flex; gap: 5px; }
-    .terminal-dots i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #64748b; }
-    .terminal-body { padding: 15px; font: .78rem/1.9 "JetBrains Mono",monospace; min-height: 100px; overflow-wrap: anywhere; }
-    .cmd { color: var(--green); }
-    .output { color: var(--muted); white-space: pre-wrap; }
-    .terminal-form { display: flex; gap: 8px; padding: 0 14px 14px; }
-    .terminal-form input { min-width: 0; flex: 1; padding: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); border-radius: 8px; outline: none; font: .78rem "JetBrains Mono",monospace; }
-    .terminal-form input:focus { border-color: var(--accent); }
-    .terminal-form button { border: 0; border-radius: 8px; background: var(--accent); color: #08101e; padding: 0 13px; font-weight: 700; }
-
-    .journey { display: grid; gap: 12px; }
-    .journey-card { display: flex; align-items: flex-start; gap: 14px; padding: 20px; }
-    .journey-icon { flex-shrink: 0; margin: 0; }
-    .journey-card h3 { font-size: .98rem; }
-    .journey-card p { color: var(--muted); font-size: .86rem; margin-top: 5px; }
-
-    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 16px; }
-    .contact-card { padding: 23px; }
-    .contact-line { display: flex; align-items: center; gap: 11px; margin-top: 17px; color: var(--muted); overflow-wrap: anywhere; }
-    .contact-line svg { color: var(--accent); flex-shrink: 0; }
-    .contact-line a:hover { color: var(--accent); }
-    .form { display: grid; gap: 12px; }
-    .form label { display: block; color: var(--muted); font-size: .82rem; margin-bottom: 4px; }
-    .form input, .form textarea {
-      width: 100%; border: 1px solid var(--line); background: var(--bg);
-      color: var(--text); border-radius: 9px; padding: 11px 12px; outline: none;
+    .hero-description {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+      margin-bottom: 29px;
     }
-    .form input:focus, .form textarea:focus { border-color: var(--accent); }
-    .form textarea { min-height: 100px; resize: vertical; }
-    .note { font-size: .76rem; color: var(--muted); }
-    footer { border-top: 1px solid var(--line); padding: 23px 0; color: var(--muted); font-size: .8rem; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-    .back-top { color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
 
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s,transform .6s; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    #toast {
-      position: fixed; z-index: 200; bottom: 20px; left: 50%;
-      transform: translate(-50%,15px); opacity: 0; pointer-events: none;
-      padding: 11px 16px; background: var(--surface2); border: 1px solid var(--line);
-      border-radius: 10px; box-shadow: 0 10px 35px #0003; transition: .25s;
-      max-width: 90%; text-align: center; font-size: .84rem;
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    #toast.show { opacity: 1; transform: translate(-50%,0); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 11px 18px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #071b16;
+      border-color: var(--accent);
+    }
+
+    .button-primary:hover {
+      background: #75f0cb;
+    }
+
+    /* GENERAL SECTION STYLES */
+    .section {
+      padding: 83px 0;
+      border-top: 1px solid rgba(164, 175, 197, 0.08);
+    }
+
+    .section-heading {
+      margin-bottom: 38px;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.3px;
+      margin-bottom: 9px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(29px, 4vw, 39px);
+      line-height: 1.3;
+      letter-spacing: -0.8px;
+      margin-bottom: 10px;
+    }
+
+    .section-heading > p:last-child {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 620px;
+    }
+
+    /* ABOUT: SMALL PHOTO + TEXT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      align-items: start;
+      gap: 38px;
+    }
+
+    .profile-column {
+      width: 100%;
+      max-width: 190px;
+    }
+
+    .profile-frame {
+      padding: 6px;
+      border: 1px solid rgba(69, 224, 176, 0.45);
+      border-radius: 17px;
+      background: var(--surface);
+    }
+
+    .profile-photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 12px;
+    }
+
+    .profile-note {
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+      margin-top: 11px;
+    }
+
+    .about-copy h3 {
+      font-size: 25px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .about-copy > p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .fact {
+      padding: 14px 15px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .fact-label {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .fact-value {
+      color: var(--text);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .skill-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(69, 224, 176, 0.55);
+      transform: translateY(-3px);
+    }
+
+    .skill-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .skill-card h3 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .learning-note {
+      margin-top: 19px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .project-card {
+      padding: 23px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(69, 224, 176, 0.55);
+      transform: translateY(-3px);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .project-number {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .project-status {
+      color: var(--muted);
+      font-size: 10px;
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 20px;
+    }
+
+    .project-card h3 {
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+
+    .project-card > p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 17px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      color: #b8f6e2;
+      background: rgba(69, 224, 176, 0.08);
+      border: 1px solid rgba(69, 224, 176, 0.15);
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      align-self: flex-start;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* CONTACT */
+    .contact-panel {
+      background:
+        radial-gradient(ellipse at top right,
+          rgba(69, 224, 176, 0.08), transparent 50%),
+        var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .contact-panel h3 {
+      font-size: 23px;
+      margin-bottom: 9px;
+    }
+
+    .contact-panel p {
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 23px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer p,
+    footer a {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    /* TABLET AND MOBILE */
+    @media (max-width: 800px) {
+      .nav-links {
+        gap: 15px;
+      }
+
+      .about-grid {
+        grid-template-columns: 155px minmax(0, 1fr);
+        gap: 25px;
+      }
+
+      .profile-column {
+        max-width: 155px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-panel {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 90%;
+      }
+
+      .nav-inner {
+        min-height: 64px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        padding: 15px 5% 20px;
+        background: #0b1020;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 11px 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 75px 0 80px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+
+      .section {
+        padding: 65px 0;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 27px;
+      }
+
+      .profile-column {
+        max-width: 125px;
+        margin: 0 auto;
+      }
+
+      .profile-frame {
+        padding: 4px;
+        border-radius: 13px;
+      }
+
+      .profile-photo {
+        border-radius: 9px;
+      }
+
+      .profile-note {
+        font-size: 10px;
+      }
+
+      .about-copy h3 {
+        font-size: 22px;
+      }
+
+      .about-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-card {
+        padding: 18px;
+      }
+
+      .project-card {
+        min-height: 0;
+      }
+
+      .contact-panel {
+        padding: 23px;
+      }
+
+      .contact-panel h3 {
+        font-size: 21px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-      .reveal { opacity: 1; transform: none; }
-    }
-    @media (max-width: 850px) {
-      .hero { padding-top: 55px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 35px; }
-      .photo-wrap { width: min(280px,85%); }
-      .photo-card img { height: 315px; }
-      .skills { grid-template-columns: repeat(2,1fr); }
-      .nav-links {
-        display: none; position: absolute; top: 70px; left: 0; right: 0;
-        padding: 18px 5%; background: var(--surface); border-bottom: 1px solid var(--line);
-        flex-direction: column; align-items: stretch; gap: 13px;
+      html {
+        scroll-behavior: auto;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 4px 0; }
-      #menuBtn { display: grid; }
-    }
-    @media (max-width: 560px) {
-      h1 { letter-spacing: -1.8px; }
-      section { padding: 55px 0; }
-      .projects, .contact-grid, .stats { grid-template-columns: 1fr; }
-      .skills { gap: 9px; }
-      .skill { padding: 14px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div id="progress"></div>
-  <canvas id="particles" aria-hidden="true"></canvas>
-  <div id="toast" role="status" aria-live="polite"></div>
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <nav class="container nav-inner" aria-label="Main navigation">
+      <a class="logo" href="#home">lakshmi<span>.</span></a>
 
-  <header>
-    <div class="container nav">
-      <a href="#home" class="logo">lakshmi<span>.dev</span></a>
-      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#terminal">Terminal</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="icon-btn" id="themeBtn" aria-label="Switch theme" title="Switch theme"><i data-lucide="sun-moon"></i></button>
-        <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
-      </div>
-    </div>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
+    <!-- HOME: NO LARGE PHOTO HERE -->
     <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <div class="eyebrow"><span class="dot"></span> DEVOPS PORTFOLIO · 2026</div>
-          <h1>Hi, I'm Lakshmi<br><span class="gradient">Kumari.</span></h1>
-          <div class="typed-line"><span id="typed"></span><span class="cursor">_</span></div>
-          <p class="hero-copy">
-            Computer Science graduate exploring DevOps, cloud infrastructure,
-            automation, and CI/CD. I'm learning how applications move from code
-            to deployment and how systems can run more reliably.
-          </p>
-          <div class="buttons">
-            <a class="btn primary" href="#projects"><i data-lucide="folder-code"></i> Explore projects</a>
-            <a class="btn" href="#contact"><i data-lucide="send"></i> Contact me</a>
-            <a class="btn" href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> GitHub</a>
-          </div>
+      <div class="container hero-content">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          DevOps · Cloud · Automation
+        </div>
 
-          <div class="terminal" id="terminal">
-            <div class="terminal-head">
-              <div class="terminal-dots"><i></i><i></i><i></i></div>
-              <span class="muted mono" style="font-size:.73rem">lakshmi@portfolio:~</span>
-              <i data-lucide="terminal"></i>
+        <h1>
+          Hi, I'm Lakshmi Kumari.
+          <span class="accent">Building my DevOps journey.</span>
+        </h1>
+
+        <p class="hero-description">
+          A Computer Science graduate interested in cloud technologies,
+          automation, and reliable deployments. Exploring DevOps tools
+          and building practical projects one step at a time.
+        </p>
+
+        <div class="button-row">
+          <a class="button button-primary" href="#projects">
+            Explore Projects <span>→</span>
+          </a>
+          <a
+            class="button"
+            href="https://github.com/lakshmikumari-123"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT: SMALL PHOTO IS ONLY HERE -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Get to know me</p>
+          <h2>About <span class="accent">Me</span></h2>
+          <p>A little about my background, interests, and learning journey.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="profile-column">
+            <div class="profile-frame">
+              <img
+                class="profile-photo"
+                src="profile.jpg"
+                alt="Lakshmi Kumari's profile photo"
+                onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='assets/profile.jpg';}"
+              >
             </div>
-            <div class="terminal-body" id="terminalOutput" aria-live="polite"><span class="cmd">$ help</span><br><span class="output">Try: about, skills, projects, github, clear</span></div>
-            <form class="terminal-form" id="terminalForm">
-              <input id="terminalInput" aria-label="Enter a terminal command" placeholder="Type a command..." autocomplete="off">
-              <button type="submit">Run</button>
-            </form>
+            <p class="profile-note">Learning · Building · Improving</p>
           </div>
-        </div>
 
-        <div class="photo-wrap reveal" id="photoWrap">
-          <div class="photo-glow"></div>
-          <div class="photo-card" id="photoCard">
-            <img src="profile.jpg" alt="Lakshmi Kumari" id="profileImage">
-            <div class="photo-caption">
-              <div><strong>Lakshmi Kumari</strong><small class="muted">DevOps & Cloud Learner</small></div>
-              <span class="status"><span class="dot" style="display:inline-block"></span> LEARNING</span>
+          <div class="about-copy">
+            <h3>
+              Hello! I'm a CSE graduate
+              <span class="accent">exploring DevOps.</span>
+            </h3>
+
+            <p>
+              I am interested in automating workflows, understanding
+              cloud infrastructure, and learning how applications are
+              built, tested, and deployed.
+            </p>
+
+            <p>
+              I have been learning tools such as Linux, Git, Docker,
+              GitHub Actions, and AWS through guided practice and
+              portfolio projects. I aim to keep improving my practical
+              skills and problem-solving ability.
+            </p>
+
+            <div class="about-facts">
+              <div class="fact">
+                <p class="fact-label">EDUCATION</p>
+                <p class="fact-value">B.Tech, Computer Science</p>
+              </div>
+
+              <div class="fact">
+                <p class="fact-label">INTEREST</p>
+                <p class="fact-value">DevOps & Cloud Computing</p>
+              </div>
+
+              <div class="fact">
+                <p class="fact-label">CURRENT LEARNING</p>
+                <p class="fact-value">CI/CD and deployment workflows</p>
+              </div>
+
+              <div class="fact">
+                <p class="fact-label">ALSO FAMILIAR WITH</p>
+                <p class="fact-value">Java, SQL and REST APIs</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-   
-<!-- ABOUT SECTION -->
-<section id="about" class="about-section">
-  <div class="section-heading">
-    <p class="section-label">GET TO KNOW ME</p>
-    <h2>About <span>Me</span></h2>
-    <p class="section-subtitle">
-      A little about my journey into DevOps and cloud technology.
-    </p>
-  </div>
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">What I'm learning</p>
+          <h2>Skills & <span class="accent">Tools</span></h2>
+          <p>Technologies I am studying and practising in my DevOps journey.</p>
+        </div>
 
-  <div class="about-container">
-    <!-- Profile photo -->
-    <div class="about-photo-wrapper">
-      <div class="about-photo-frame">
-        <img
-          src="profile.jpg"
-          alt="My profile photo"
-          class="about-photo"
-          onerror="this.onerror=null;this.src='assets/profile.jpg';"
-        />
+        <div class="skills-grid">
+          <article class="skill-card">
+            <div class="skill-icon">🐧</div>
+            <h3>Linux</h3>
+            <p>Command-line basics, files, permissions, processes, and logs.</p>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-icon">🌿</div>
+            <h3>Git & GitHub</h3>
+            <p>Version control, repositories, commits, branches, and collaboration.</p>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-icon">🐳</div>
+            <h3>Docker</h3>
+            <p>Container basics, Dockerfiles, images, and application packaging.</p>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-icon">⚙️</div>
+            <h3>GitHub Actions</h3>
+            <p>Workflow configuration and automated build pipelines.</p>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-icon">☁️</div>
+            <h3>AWS</h3>
+            <p>Learning cloud services, access management, networking, and storage.</p>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-icon">💻</div>
+            <h3>Java & SQL</h3>
+            <p>Programming fundamentals, database queries, and REST API concepts.</p>
+          </article>
+        </div>
+
+        <p class="learning-note">
+          This section reflects my learning areas; experience levels may vary by tool.
+        </p>
       </div>
+    </section>
 
-      <div class="about-photo-caption">
-        <span class="status-dot"></span>
-        Learning and building every day
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Things I'm building</p>
+          <h2>My <span class="accent">Projects</span></h2>
+          <p>A selection of my portfolio work and DevOps practice.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-top">
+              <span class="project-number">PROJECT 01</span>
+              <span class="project-status">Portfolio</span>
+            </div>
+
+            <h3>DevOps Portfolio Website</h3>
+            <p>
+              A responsive personal website hosted through GitHub,
+              presenting my background, technical interests, and projects.
+            </p>
+
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">GitHub</span>
+            </div>
+
+            <a
+              class="project-link"
+              href="https://github.com/lakshmikumari-123/my-frst-website"
+              target="_blank"
+              rel="noopener noreferrer"
+            >View Repository ↗</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <span class="project-number">PROJECT 02</span>
+              <span class="project-status">CI/CD Practice</span>
+            </div>
+
+            <h3>Docker & GitHub Actions</h3>
+            <p>
+              A portfolio deployment practice project using a Dockerfile
+              and a GitHub Actions workflow to automate the image build.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Docker</span>
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">CI/CD</span>
+            </div>
+
+            <a
+              class="project-link"
+              href="https://github.com/lakshmikumari-123/my-frst-website"
+              target="_blank"
+              rel="noopener noreferrer"
+            >View Repository ↗</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <span class="project-number">PROJECT 03</span>
+              <span class="project-status">Learning</span>
+            </div>
+
+            <h3>Linux Administration Practice</h3>
+            <p>
+              Learning command-line operations, file permissions,
+              process inspection, and basic troubleshooting techniques.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Linux</span>
+              <span class="tag">Shell Commands</span>
+              <span class="tag">Troubleshooting</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <span class="project-number">PROJECT 04</span>
+              <span class="project-status">Learning</span>
+            </div>
+
+            <h3>AWS Cloud Fundamentals</h3>
+            <p>
+              Learning cloud infrastructure concepts, IAM permissions,
+              S3 storage, networking, and security basics.
+            </p>
+
+            <div class="tags">
+              <span class="tag">AWS</span>
+              <span class="tag">IAM</span>
+              <span class="tag">S3</span>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- About details -->
-    <div class="about-content">
-      <p class="about-greeting">HELLO, WORLD! 👋</p>
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Let's connect</p>
+          <h2>Contact <span class="accent">Me</span></h2>
+          <p>Interested in my work? Feel free to connect with me.</p>
+        </div>
 
-      <h3>
-        I'm a Computer Science graduate
-        <span>exploring DevOps.</span>
-      </h3>
-
-      <p class="about-description">
-        I'm passionate about automation, cloud technologies, and
-        reliable software delivery. I'm continuously improving my
-        skills through hands-on learning and personal projects.
-      </p>
-
-      <p class="about-description">
-        My goal is to build practical solutions using DevOps tools
-        and understand how applications move from development to
-        deployment.
-      </p>
-
-      <div class="about-details">
-        <div class="about-detail">
-          <span class="detail-icon">🎓</span>
+        <div class="contact-panel">
           <div>
-            <h4>Education</h4>
-            <p>B.Tech in Computer Science</p>
+            <h3>Let's build and learn together.</h3>
+            <p>
+              I'm interested in learning opportunities, DevOps projects,
+              and connecting with people in the technology community.
+            </p>
           </div>
-        </div>
 
-        <div class="about-detail">
-          <span class="detail-icon">☁️</span>
-          <div>
-            <h4>Current Focus</h4>
-            <p>DevOps and Cloud Technologies</p>
-          </div>
-        </div>
+          <div class="contact-links">
+            <a
+              class="button button-primary"
+              href="https://github.com/lakshmikumari-123"
+              target="_blank"
+              rel="noopener noreferrer"
+            >GitHub ↗</a>
 
-        <div class="about-detail">
-          <span class="detail-icon">🛠️</span>
-          <div>
-            <h4>Tools I'm Learning</h4>
-            <p>Linux, Git, Docker, GitHub Actions, AWS</p>
-          </div>
-        </div>
-      </div>
-
-      <a href="#projects" class="about-button">
-        Explore My Projects <span>→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-    <section id="skills">
-      <div class="container reveal">
-        <div class="section-head">
-          <div class="kicker">// 02 — TOOLKIT</div>
-          <h2>My technical <span class="gradient">toolkit.</span></h2>
-          <p class="section-desc">Technologies and concepts in my learning journey.</p>
-        </div>
-        <div class="skills">
-          <article class="skill"><div class="skill-icon"><i data-lucide="terminal"></i></div><h3>Linux</h3><p>Commands, files, processes and system basics.</p></article>
-          <article class="skill"><div class="skill-icon"><i data-lucide="git-branch"></i></div><h3>Git & GitHub</h3><p>Repositories, commits and version control.</p></article>
-          <article class="skill"><div class="skill-icon"><i data-lucide="container"></i></div><h3>Docker</h3><p>Images, containers and Dockerfiles.</p></article>
-          <article class="skill"><div class="skill-icon"><i data-lucide="workflow"></i></div><h3>GitHub Actions</h3><p>Workflow automation and CI/CD basics.</p></article>
-          <article class="skill"><div class="skill-icon"><i data-lucide="cloud"></i></div><h3>AWS</h3><p>Cloud services and infrastructure basics.</p></article>
-          <article class="skill"><div class="skill-icon"><i data-lucide="database"></i></div><h3>SQL</h3><p>Queries and relational databases.</p></article>
-          <article class="skill"><div class="skill-icon"><i data-lucide="coffee"></i></div><h3>Java</h3><p>Core programming fundamentals.</p></article>
-          <article class="skill"><div class="skill-icon"><i data-lucide="code-2"></i></div><h3>REST APIs</h3><p>HTTP requests and endpoint concepts.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container reveal">
-        <div class="section-head">
-          <div class="kicker">// 03 — PROJECTS</div>
-          <h2>Things I'm <span class="gradient">working on.</span></h2>
-          <p class="section-desc">Filter by category to explore my portfolio and learning areas.</p>
-        </div>
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button class="filter active" data-filter="all">All projects</button>
-          <button class="filter" data-filter="docker">Docker</button>
-          <button class="filter" data-filter="cicd">CI/CD</button>
-          <button class="filter" data-filter="cloud">Cloud</button>
-          <button class="filter" data-filter="java">Java</button>
-        </div>
-        <div class="projects" id="projectGrid">
-          <article class="project" data-category="docker cicd">
-            <div class="project-top"><div class="project-icon"><i data-lucide="layers"></i></div><span class="project-type">PORTFOLIO</span></div>
-            <h3>Dockerized DevOps Portfolio</h3>
-            <p>A responsive portfolio packaged with Docker and connected to a GitHub Actions workflow.</p>
-            <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span></div>
-            <div class="project-links"><a href="https://github.com/lakshmikumari-123/my-frst-website" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> View repository</a></div>
-          </article>
-          <article class="project" data-category="docker cicd">
-            <div class="project-top"><div class="project-icon"><i data-lucide="container"></i></div><span class="project-type">PRACTICE</span></div>
-            <h3>Container Build Pipeline</h3>
-            <p>Practice building a Docker image and automating image builds with a workflow.</p>
-            <div class="tags"><span class="tag">Dockerfile</span><span class="tag">CI/CD</span><span class="tag">GitHub</span></div>
-            <div class="project-links"><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> GitHub profile</a></div>
-          </article>
-          <article class="project" data-category="cloud">
-            <div class="project-top"><div class="project-icon"><i data-lucide="cloud-cog"></i></div><span class="project-type">LEARNING</span></div>
-            <h3>AWS Fundamentals</h3>
-            <p>Learning IAM, S3, networking, security groups and cost-conscious cloud usage.</p>
-            <div class="tags"><span class="tag">AWS</span><span class="tag">IAM</span><span class="tag">S3</span></div>
-            <div class="project-links"><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link"></i> GitHub profile</a></div>
-          </article>
-          <article class="project" data-category="java">
-            <div class="project-top"><div class="project-icon"><i data-lucide="coffee"></i></div><span class="project-type">PRACTICE</span></div>
-            <h3>Java & API Practice</h3>
-            <p>Developing Java, SQL and REST API fundamentals through programming practice.</p>
-            <div class="tags"><span class="tag">Java</span><span class="tag">SQL</span><span class="tag">REST APIs</span></div>
-            <div class="project-links"><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i> GitHub profile</a></div>
-          </article>
-        </div>
-        <p id="noProjects" class="muted" hidden style="margin-top:15px">No projects in this category yet.</p>
-      </div>
-    </section>
-
-    <section id="journey">
-      <div class="container reveal">
-        <div class="section-head">
-          <div class="kicker">// 04 — MY JOURNEY</div>
-          <h2>Learn. Practise. <span class="gradient">Improve.</span></h2>
-          <p class="section-desc">My current learning path toward DevOps and cloud engineering.</p>
-        </div>
-        <div class="journey">
-          <article class="journey-card"><div class="journey-icon"><i data-lucide="git-branch"></i></div><div><h3>Version control</h3><p>Practising Git, GitHub, repository management and commits.</p></div></article>
-          <article class="journey-card"><div class="journey-icon"><i data-lucide="container"></i></div><div><h3>Containers & automation</h3><p>Learning Docker images and containers, then automating builds with GitHub Actions.</p></div></article>
-          <article class="journey-card"><div class="journey-icon"><i data-lucide="cloud"></i></div><div><h3>Cloud fundamentals</h3><p>Studying AWS, permissions, networking, and cost awareness.</p></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container reveal">
-        <div class="section-head">
-          <div class="kicker">// 05 — TRY IT YOURSELF</div>
-          <h2>A little interactive <span class="gradient">terminal.</span></h2>
-          <p class="section-desc">Type a command below and explore the portfolio without leaving the page.</p>
-        </div>
-        <div class="terminal">
-          <div class="terminal-head"><span class="mono muted">portfolio-shell</span><i data-lucide="terminal"></i></div>
-          <div class="terminal-body" id="terminalOutput2" aria-live="polite"><span class="output">Welcome. Type help to see available commands.</span></div>
-          <form class="terminal-form" id="terminalForm2">
-            <input id="terminalInput2" aria-label="Terminal command" placeholder="help, about, skills, projects, github..." autocomplete="off">
-            <button type="submit">Run</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container reveal">
-        <div class="section-head">
-          <div class="kicker">// 06 — CONTACT</div>
-          <h2>Let's <span class="gradient">connect.</span></h2>
-          <p class="section-desc">For DevOps discussions, collaboration, and entry-level opportunities.</p>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>Find me online</h3>
-            <div class="contact-line"><i data-lucide="github"></i><a href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer">github.com/lakshmikumari-123</a></div>
-            <div class="contact-line"><i data-lucide="code-2"></i><span>DevOps · Docker · CI/CD · AWS</span></div>
-            <p class="note" style="margin-top:20px">Add your professional email address when you're ready to publish it.</p>
-          </div>
-          <div class="contact-card">
-            <form class="form" id="contactForm">
-              <div><label for="visitorName">Your name</label><input id="visitorName" required maxlength="80" placeholder="Enter your name"></div>
-              <div><label for="visitorEmail">Your email</label><input id="visitorEmail" type="email" required maxlength="120" placeholder="you@example.com"></div>
-              <div><label for="visitorMessage">Message</label><textarea id="visitorMessage" required maxlength="1500" placeholder="Write a message..."></textarea></div>
-              <button class="btn primary" type="submit"><i data-lucide="mail"></i> Prepare email</button>
-              <p class="note">This opens your email app. It does not send or store messages on this website.</p>
-            </form>
+            <a
+              class="button"
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >LinkedIn ↗</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
-      <span>© <span id="year"></span> Lakshmi Kumari · HTML, CSS & JavaScript</span>
-      <a href="#home" class="back-top">Back to top <i data-lucide="arrow-up"></i></a>
+      <p>© <span id="year"></span> Lakshmi Kumari. Built with care.</p>
+      <a href="#home">Back to top ↑</a>
     </div>
   </footer>
 
   <script>
-    // Initialize Lucide icons.
-    function icons() {
-      if (window.lucide) window.lucide.createIcons();
-    }
-    icons();
-
-    // Theme switcher.
-    document.getElementById("themeBtn").addEventListener("click", function () {
-      document.body.classList.toggle("light");
-      this.innerHTML = document.body.classList.contains("light")
-        ? '<i data-lucide="moon"></i>'
-        : '<i data-lucide="sun-moon"></i>';
-      icons();
-    });
-
-    // Responsive mobile menu.
-    const menuBtn = document.getElementById("menuBtn");
+    // Mobile navigation
+    const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
-    menuBtn.addEventListener("click", function () {
-      const opened = navLinks.classList.toggle("open");
-      this.setAttribute("aria-expanded", String(opened));
-      this.innerHTML = opened ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
-      icons();
-    });
-    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      menuBtn.setAttribute("aria-expanded", "false");
-      menuBtn.innerHTML = '<i data-lucide="menu"></i>';
-      icons();
-    }));
 
-    // Typing animation.
-    const words = ["DevOps Learner", "Docker Enthusiast", "CI/CD Explorer", "Cloud Computing Learner"];
-    const typed = document.getElementById("typed");
-    let wordIndex = 0, charIndex = 0, deleting = false;
-    function typeRole() {
-      const word = words[wordIndex];
-      typed.textContent = word.slice(0, charIndex);
-      if (!deleting && charIndex < word.length) {
-        charIndex++;
-        setTimeout(typeRole, 85);
-      } else if (!deleting) {
-        deleting = true;
-        setTimeout(typeRole, 1200);
-      } else if (charIndex > 0) {
-        charIndex--;
-        setTimeout(typeRole, 40);
-      } else {
-        deleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        setTimeout(typeRole, 250);
-      }
-    }
-    typeRole();
-
-    // Scroll progress bar.
-    function updateProgress() {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
-      document.getElementById("progress").style.width = progress + "%";
-    }
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
-
-    // Reveal sections when they enter view.
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-
-    // Highlight the active navigation link.
-    const sections = document.querySelectorAll("main section[id]");
-    const navObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.querySelectorAll("a").forEach(a => {
-            a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id);
-          });
-        }
-      });
-    }, { rootMargin: "-25% 0px -65% 0px" });
-    sections.forEach(section => navObserver.observe(section));
-
-    // Interactive project filters.
-    const filters = document.querySelectorAll(".filter");
-    const projects = document.querySelectorAll(".project");
-    filters.forEach(button => button.addEventListener("click", () => {
-      filters.forEach(b => b.classList.remove("active"));
-      button.classList.add("active");
-      let shown = 0;
-      projects.forEach(project => {
-        const categories = project.dataset.category.split(" ");
-        const match = button.dataset.filter === "all" || categories.includes(button.dataset.filter);
-        project.hidden = !match;
-        if (match) shown++;
-      });
-      document.getElementById("noProjects").hidden = shown !== 0;
-    }));
-
-    // Small toast notification.
-    let toastTimer;
-    function toast(message) {
-      const box = document.getElementById("toast");
-      box.textContent = message;
-      box.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => box.classList.remove("show"), 2500);
-    }
-
-    // Interactive demo terminal. These are simulated commands, not a real shell.
-    function runCommand(command, outputId) {
-      const output = document.getElementById(outputId);
-      const cmd = command.trim().toLowerCase();
-      const responses = {
-        help: "Available commands: help, about, skills, projects, github, clear",
-        about: "Lakshmi Kumari | Computer Science graduate | DevOps learner",
-        skills: "Linux | Git | GitHub | Docker | GitHub Actions | AWS | Java | SQL | REST APIs",
-        projects: "Portfolio: my-frst-website\nOpen the Projects section to explore learning areas.",
-        github: "Opening Lakshmi's GitHub profile..."
-      };
-      if (cmd === "clear") {
-        output.innerHTML = "";
-        return;
-      }
-      if (cmd === "github") {
-        output.innerHTML = '<span class="cmd">$ ' + safe(command) + '</span><br><span class="output">' + responses.github + '</span>';
-        window.open("https://github.com/lakshmikumari-123", "_blank", "noopener,noreferrer");
-        return;
-      }
-      const result = responses[cmd] || "Command not found. Type help to see available commands.";
-      output.innerHTML = '<span class="cmd">$ ' + safe(command) + '</span><br><span class="output">' + safe(result) + '</span>';
-    }
-    function safe(value) {
-      return value.replace(/[&<>"']/g, char => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-      })[char]);
-    }
-
-    document.getElementById("terminalForm").addEventListener("submit", event => {
-      event.preventDefault();
-      const input = document.getElementById("terminalInput");
-      if (!input.value.trim()) return;
-      runCommand(input.value, "terminalOutput");
-      input.value = "";
-    });
-    document.getElementById("terminalForm2").addEventListener("submit", event => {
-      event.preventDefault();
-      const input = document.getElementById("terminalInput2");
-      if (!input.value.trim()) return;
-      runCommand(input.value, "terminalOutput2");
-      input.value = "";
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "✕" : "☰";
     });
 
-    // Subtle 3D tilt on the profile card.
-    const photoCard = document.getElementById("photoCard");
-    const photoWrap = document.getElementById("photoWrap");
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      photoWrap.addEventListener("mousemove", event => {
-        const rect = photoWrap.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - .5;
-        const y = (event.clientY - rect.top) / rect.height - .5;
-        photoCard.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+    // Close the mobile menu after selecting a section
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
       });
-      photoWrap.addEventListener("mouseleave", () => photoCard.style.transform = "");
-    }
-
-    // Lightweight animated background particles.
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    let points = [];
-    function resizeCanvas() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      points = Array.from({ length: Math.min(45, Math.floor(window.innerWidth / 25)) }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - .5) * .25,
-        vy: (Math.random() - .5) * .25
-      }));
-    }
-    function animateParticles() {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      const light = document.body.classList.contains("light");
-      const color = light ? "37,99,235" : "96,165,250";
-      points.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
-        if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color},.45)`;
-        ctx.fill();
-        for (let j = i + 1; j < points.length; j++) {
-          const q = points[j];
-          const dx = p.x - q.x, dy = p.y - q.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 105) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(${color},${(1 - distance / 105) * .11})`;
-            ctx.stroke();
-          }
-        }
-      });
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        requestAnimationFrame(animateParticles);
-      }
-    }
-    resizeCanvas();
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      animateParticles();
-    }
-    window.addEventListener("resize", resizeCanvas);
-
-    // Contact form creates an email draft; it does not send data to a server.
-    document.getElementById("contactForm").addEventListener("submit", event => {
-      event.preventDefault();
-      const name = document.getElementById("visitorName").value.trim();
-      const email = document.getElementById("visitorEmail").value.trim();
-      const message = document.getElementById("visitorMessage").value.trim();
-      const subject = encodeURIComponent("Portfolio contact from " + name);
-      const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\n" + message);
-      // Replace this address with your real professional email before using the form.
-      const recipient = "";
-      if (!recipient) {
-        toast("Add your professional email in the contact form code first.");
-        return;
-      }
-      window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
     });
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // If the photo cannot be found, display a clear fallback.
-    document.getElementById("profileImage").addEventListener("error", function () {
-      this.style.display = "none";
-      const fallback = document.createElement("div");
-      fallback.style.cssText = "height:300px;display:grid;place-items:center;text-align:center;color:var(--muted);padding:20px";
-      fallback.innerHTML = '<div><i data-lucide="image"></i><p>Check the profile.jpg file path in GitHub.</p></div>';
-      this.parentElement.insertBefore(fallback, this);
-      icons();
-    });
+    // Automatically update the footer year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
   </script>
 </body>
 </html>
