@@ -2,1201 +2,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b14">
-  <meta name="description" content="Lakshmi Kumari's DevOps and cloud portfolio">
-  <title>Lakshmi Kumari | DevOps Portfolio</title>
-
-  <style>
-    :root {
-      --bg: #080b14;
-      --surface: #101522;
-      --surface2: #171e30;
-      --text: #edf1ff;
-      --muted: #9ba8c0;
-      --accent: #619bff;
-      --purple: #9061f9;
-      --green: #42e6a4;
-      --border: #283145;
-      --nav: rgba(8, 11, 20, .94);
-    }
-
-    body.light {
-      --bg: #f5f7fc;
-      --surface: #ffffff;
-      --surface2: #edf1fa;
-      --text: #152039;
-      --muted: #59657a;
-      --accent: #316fe5;
-      --purple: #8050df;
-      --green: #07885b;
-      --border: #dce2ed;
-      --nav: rgba(245, 247, 252, .94);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 85px;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      line-height: 1.7;
-      transition: background .25s, color .25s;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button, input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .container {
-      width: min(1120px, 88%);
-      margin: auto;
-    }
-
-    .accent {
-      color: var(--accent);
-    }
-
-    /* NAVIGATION */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: var(--nav);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav {
-      min-height: 66px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      white-space: nowrap;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 25px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--accent);
-    }
-
-    .theme-btn,
-    .menu-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 18px;
-    }
-
-    .menu-btn {
-      display: none;
-    }
-
-    /* HOME: TEXT AND TERMINAL ONLY */
-
-    .hero {
-      position: relative;
-      padding: 90px 0 80px;
-      border-bottom: 1px solid var(--border);
-      background:
-        radial-gradient(ellipse at 75% 10%,
-          rgba(97, 155, 255, .10), transparent 38%);
-    }
-
-    .hero-inner {
-      max-width: 850px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      gap: 9px;
-      align-items: center;
-      padding: 6px 12px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 23px;
-    }
-
-    .green-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.08;
-      letter-spacing: -2.8px;
-      margin-bottom: 22px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(100deg, var(--accent), var(--purple));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-description {
-      color: var(--muted);
-      max-width: 700px;
-      font-size: 16px;
-      line-height: 1.9;
-      margin-bottom: 26px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 11px 17px;
-      min-height: 44px;
-      border-radius: 11px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform .2s, border-color .2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-    }
-
-    .btn-primary {
-      color: #fff;
-      border: none;
-      background: linear-gradient(110deg, #3267ee, #8137eb);
-    }
-
-    .btn-primary:hover {
-      filter: brightness(1.12);
-    }
-
-    /* INTERACTIVE TERMINAL */
-
-    .terminal {
-      max-width: 750px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-top: 30px;
-    }
-
-    .terminal-head {
-      background: var(--surface2);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 17px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .terminal-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .terminal-dots span {
-      width: 10px;
-      height: 10px;
-      background: #64748b;
-      border-radius: 50%;
-    }
-
-    .terminal-title {
-      color: var(--muted);
-      font: 12px monospace;
-    }
-
-    .terminal-body {
-      padding: 18px;
-      font-family: Consolas, monospace;
-      font-size: 13px;
-    }
-
-    .terminal-output {
-      min-height: 76px;
-      color: var(--muted);
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      margin-bottom: 15px;
-    }
-
-    .terminal-output .prompt {
-      color: var(--green);
-    }
-
-    .terminal-form {
-      display: flex;
-      gap: 9px;
-    }
-
-    .terminal-form input {
-      width: 100%;
-      min-width: 0;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: var(--bg);
-      color: var(--text);
-      outline: none;
-    }
-
-    .terminal-form input:focus {
-      border-color: var(--accent);
-    }
-
-    .terminal-form button {
-      padding: 10px 16px;
-      border: none;
-      border-radius: 9px;
-      background: var(--accent);
-      color: #071323;
-      font-weight: 800;
-    }
-
-    /* SHARED SECTIONS */
-
-    .section {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-heading {
-      margin-bottom: 36px;
-    }
-
-    .kicker {
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2.5px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(30px, 4vw, 42px);
-      line-height: 1.3;
-      margin-bottom: 10px;
-      letter-spacing: -1px;
-    }
-
-    .section-heading > p:last-child {
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 650px;
-    }
-
-    /* ABOUT: PHOTO ONLY HERE */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 150px minmax(0, 1fr);
-      align-items: start;
-      gap: 35px;
-    }
-
-    .about-photo-wrap {
-      width: 150px;
-      max-width: 100%;
-    }
-
-    .about-photo-frame {
-      padding: 4px;
-      border: 1px solid rgba(97, 155, 255, .55);
-      border-radius: 14px;
-      background: var(--surface);
-      box-shadow: 0 8px 30px rgba(70, 100, 180, .12);
-    }
-
-    .about-photo {
-      display: block;
-      width: 100%;
-      height: 185px;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 10px;
-    }
-
-    .photo-caption {
-      color: var(--muted);
-      text-align: center;
-      font-size: 10px;
-      margin-top: 9px;
-    }
-
-    .about-copy h3 {
-      font-size: 24px;
-      line-height: 1.45;
-      margin-bottom: 14px;
-    }
-
-    .about-copy > p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 13px;
-    }
-
-    .about-details {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 23px;
-    }
-
-    .detail-card {
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--surface);
-    }
-
-    .detail-card strong {
-      display: block;
-      font-size: 12px;
-      color: var(--accent);
-      margin-bottom: 5px;
-    }
-
-    .detail-card span {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* SKILLS */
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .skill-card {
-      padding: 20px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: var(--surface);
-      transition: transform .2s, border-color .2s;
-    }
-
-    .skill-card:hover,
-    .project-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-    }
-
-    .skill-icon {
-      font-size: 22px;
-      margin-bottom: 9px;
-    }
-
-    .skill-card h3 {
-      font-size: 15px;
-      margin-bottom: 7px;
-    }
-
-    .skill-card p {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    /* PROJECTS */
-
-    .project-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 23px;
-    }
-
-    .filter-btn {
-      padding: 8px 13px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface);
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .filter-btn.active {
-      background: var(--accent);
-      color: #071323;
-      border-color: var(--accent);
-      font-weight: 800;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .project-card {
-      padding: 22px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      display: flex;
-      flex-direction: column;
-      min-height: 220px;
-      transition: transform .2s, border-color .2s;
-    }
-
-    .project-card[hidden] {
-      display: none;
-    }
-
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    .project-number {
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .project-status {
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 3px 8px;
-      font-size: 10px;
-    }
-
-    .project-card h3 {
-      font-size: 17px;
-      margin-bottom: 9px;
-    }
-
-    .project-card > p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: auto;
-      margin-bottom: 18px;
-    }
-
-    .tag {
-      color: var(--green);
-      background: rgba(66, 230, 164, .07);
-      border: 1px solid rgba(66, 230, 164, .15);
-      padding: 4px 8px;
-      border-radius: 5px;
-      font-size: 10px;
-    }
-
-    .project-link {
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 700;
-      align-self: flex-start;
-    }
-
-    .project-link:hover {
-      text-decoration: underline;
-    }
-
-    /* CONTACT */
-
-    .contact-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-      padding: 30px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-    }
-
-    .contact-box h3 {
-      font-size: 22px;
-      margin-bottom: 8px;
-    }
-
-    .contact-box p {
-      color: var(--muted);
-      font-size: 13px;
-      max-width: 580px;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 22px 0;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    footer p,
-    footer a {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    footer a:hover {
-      color: var(--accent);
-    }
-
-    @media (max-width: 760px) {
-      .nav-right {
-        gap: 10px;
-      }
-
-      .menu-btn {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 66px;
-        left: 0;
-        right: 0;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
-        padding: 14px 6%;
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        display: block;
-        padding: 9px 0;
-      }
-
-      .hero {
-        padding: 70px 0;
-      }
-
-      .hero h1 {
-        letter-spacing: -1.5px;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .about-grid {
-        grid-template-columns: 125px minmax(0, 1fr);
-        gap: 22px;
-      }
-
-      .about-photo-wrap {
-        width: 125px;
-      }
-
-      .about-photo {
-        height: 155px;
-      }
-
-      .contact-box {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .container {
-        width: 90%;
-      }
-
-      .section {
-        padding: 60px 0;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 23px;
-      }
-
-      .about-photo-wrap {
-        width: 112px;
-      }
-
-      .about-photo {
-        height: 140px;
-      }
-
-      .about-details,
-      .skills-grid,
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .terminal-body {
-        padding: 12px;
-      }
-
-      .terminal-form {
-        gap: 7px;
-      }
-
-      .terminal-form button {
-        padding: 9px 12px;
-      }
-
-      .contact-box {
-        padding: 22px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *, *::before, *::after {
-        transition: none !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b14">
+<title>Lakshmi Kumari | DevOps Portfolio</title>
+<meta name="description" content="Explore Lakshmi Kumari's DevOps, cloud and automation portfolio">
+
+<style>
+:root {
+  --bg:#080b14; --panel:#101624; --panel2:#171f30;
+  --text:#edf2ff; --muted:#9aa8c0; --border:#283247;
+  --blue:#65a5ff; --purple:#9874ff; --green:#48e6a5;
+}
+body.light {
+  --bg:#f5f7fc; --panel:#fff; --panel2:#eaf0fa;
+  --text:#17223a; --muted:#59677f; --border:#dce3ef;
+  --blue:#286bdc; --purple:#7746d9; --green:#07865a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  line-height:1.7;transition:background .3s,color .3s;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1080px,90%);margin:auto}
+.muted{color:var(--muted)}
+.gradient{
+  background:linear-gradient(110deg,var(--blue),var(--purple));
+  color:transparent;background-clip:text;-webkit-background-clip:text;
+}
+header{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
+}
+nav{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:850;font-size:21px;letter-spacing:-1px}
+.logo span{color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;gap:23px;list-style:none}
+.nav-links a{font-size:13px;color:var(--muted);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--blue)}
+.nav-btn{
+  width:40px;height:40px;border-radius:11px;border:1px solid var(--border);
+  background:var(--panel);color:var(--text)
+}
+#menuToggle{display:none}
+.hero{
+  min-height:580px;display:flex;align-items:center;padding:75px 0;
+  background:radial-gradient(ellipse at 75% 15%,rgba(89,130,255,.12),transparent 42%);
+  border-bottom:1px solid var(--border);
+}
+.hero-content{max-width:790px}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:6px 12px;border:1px solid var(--border);
+  border-radius:40px;color:var(--muted);font-size:12px;margin-bottom:24px
+}
+.dot{width:7px;height:7px;background:var(--green);border-radius:50%;display:inline-block}
+h1{font-size:clamp(44px,8vw,78px);line-height:1.08;letter-spacing:-3px;margin-bottom:20px}
+.hero p{font-size:16px;color:var(--muted);max-width:700px}
+.buttons{display:flex;flex-wrap:wrap;gap:11px;margin:27px 0}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 17px;border:1px solid var(--border);border-radius:11px;
+  background:var(--panel);color:var(--text);font-size:13px;font-weight:750;
+  transition:transform .2s,border-color .2s,filter .2s
+}
+.btn:hover{transform:translateY(-3px);border-color:var(--blue)}
+.btn.primary{background:linear-gradient(110deg,#3169ee,#823ee8);color:white;border:0}
+.btn.primary:hover{filter:brightness(1.12)}
+.terminal{max-width:720px;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:28px}
+.terminal-head{padding:12px 16px;background:var(--panel2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.terminal-dots{display:flex;gap:6px}
+.terminal-dots i{width:9px;height:9px;border-radius:50%;background:#65758f}
+.terminal-title{font:12px monospace;color:var(--muted)}
+.terminal-body{padding:17px;font:13px Consolas,monospace}
+.terminal-output{white-space:pre-wrap;overflow-wrap:anywhere;min-height:78px;color:var(--muted);margin-bottom:12px}
+.terminal-output b{color:var(--green)}
+.terminal-form{display:flex;gap:9px}
+.terminal-form input{min-width:0;flex:1;padding:11px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none}
+.terminal-form input:focus{border-color:var(--blue)}
+.terminal-form button{border:0;border-radius:8px;padding:9px 15px;background:var(--blue);color:#071323;font-weight:800}
+.section{padding:80px 0;border-bottom:1px solid var(--border)}
+.kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:8px}
+.section-title{font-size:clamp(30px,4vw,42px);line-height:1.3;letter-spacing:-1px}
+.section-intro{font-size:14px;color:var(--muted);margin-top:9px;max-width:650px}
+.section-heading{margin-bottom:34px}
+
+/* Animation on scroll */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* About photo appears ONLY here */
+.about-grid{display:grid;grid-template-columns:145px minmax(0,1fr);gap:34px;align-items:start}
+.photo-wrap{width:145px}
+.photo-frame{padding:4px;border:1px solid var(--border);background:var(--panel);border-radius:13px;box-shadow:0 10px 28px rgba(78,120,220,.12)}
+.profile-photo{display:block;width:100%;height:180px;object-fit:cover;object-position:center top;border-radius:9px}
+.photo-caption{text-align:center;font-size:10px;color:var(--muted);margin-top:8px}
+.about-copy h3{font-size:23px;line-height:1.4;margin-bottom:12px}
+.about-copy p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:21px}
+.detail{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px}
+.detail strong{display:block;color:var(--blue);font-size:11px;margin-bottom:4px}
+.detail span{font-size:12px;color:var(--muted)}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.skill-card{padding:20px;background:var(--panel);border:1px solid var(--border);border-radius:13px;transition:transform .25s,border-color .25s}
+.skill-card:hover{transform:translateY(-5px);border-color:var(--blue)}
+.skill-icon{font-size:23px;margin-bottom:8px}
+.skill-card h3{font-size:15px;margin-bottom:6px}
+.skill-card p{font-size:12px;color:var(--muted)}
+.skill-level{height:5px;background:var(--panel2);border-radius:8px;margin-top:15px;overflow:hidden}
+.skill-level span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:8px;transition:width 1.2s ease}
+.skill-card.visible .skill-level span{width:var(--level)}
+
+/* Projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.filter-btn{padding:8px 13px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:var(--muted);font-size:12px}
+.filter-btn.active{background:var(--blue);color:#071323;border-color:var(--blue);font-weight:800}
+.projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.project-card{display:flex;flex-direction:column;padding:22px;background:var(--panel);border:1px solid var(--border);border-radius:13px;transition:transform .25s,border-color .25s}
+.project-card:hover{transform:translateY(-4px);border-color:var(--blue)}
+.project-card[hidden]{display:none}
+.project-meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}
+.project-number{font-size:11px;color:var(--blue);font-weight:800}
+.project-status{font-size:10px;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:3px 8px}
+.project-card h3{font-size:17px;margin-bottom:8px}
+.project-card p{font-size:13px;color:var(--muted);margin-bottom:15px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;margin-bottom:17px}
+.tag{font-size:10px;padding:4px 8px;border-radius:5px;color:var(--green);background:color-mix(in srgb,var(--green) 8%,transparent);border:1px solid color-mix(in srgb,var(--green) 20%,transparent)}
+.project-link{font-size:12px;font-weight:750;color:var(--blue);align-self:flex-start}
+.project-link:hover{text-decoration:underline}
+
+/* Contact */
+.contact-box{padding:28px;background:var(--panel);border:1px solid var(--border);border-radius:15px;display:flex;justify-content:space-between;align-items:center;gap:24px}
+.contact-box h3{font-size:21px;margin-bottom:7px}
+.contact-box p{font-size:13px;color:var(--muted);max-width:570px}
+.contact-actions{display:flex;flex-wrap:wrap;gap:9px}
+footer{padding:22px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer p,footer a{font-size:11px;color:var(--muted)}
+#backTop{
+  position:fixed;right:20px;bottom:20px;width:43px;height:43px;
+  border:1px solid var(--border);border-radius:12px;background:var(--panel);
+  color:var(--text);opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:all .25s;z-index:80
+}
+#backTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+#toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;background:var(--panel2);border:1px solid var(--border);padding:10px 15px;border-radius:10px;font-size:12px;transition:.25s;z-index:200;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:760px){
+  #menuToggle{display:block}
+  .nav-right{gap:8px}
+  .nav-links{display:none;position:absolute;top:66px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);padding:14px 5%;flex-direction:column;gap:0}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:9px 0}
+  .hero{padding:65px 0;min-height:auto}
+  h1{letter-spacing:-1.5px}
+  .skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .about-grid{grid-template-columns:125px minmax(0,1fr);gap:22px}
+  .photo-wrap{width:125px}
+  .profile-photo{height:155px}
+  .contact-box{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:520px){
+  .section{padding:58px 0}
+  .about-grid{grid-template-columns:1fr;gap:20px}
+  .photo-wrap{width:110px}
+  .profile-photo{height:138px}
+  .details,.skills-grid,.projects-grid{grid-template-columns:1fr}
+  .terminal-body{padding:12px}
+  .terminal-form{gap:6px}
+  .terminal-form button{padding:8px 11px}
+  .contact-box{padding:21px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+</style>
 </head>
 
 <body>
-  <!-- NAVIGATION -->
-  <header>
-    <nav class="container nav" aria-label="Main navigation">
-      <a href="#home" class="logo">lakshmi<span>.dev</span></a>
-
-      <div class="nav-right">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#terminal">Terminal</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <button class="theme-btn" id="themeToggle"
-          type="button" aria-label="Toggle color theme">☾</button>
-
-        <button class="menu-btn" id="menuToggle"
-          type="button" aria-label="Open navigation"
-          aria-expanded="false">☰</button>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- HOME: PHOTO REMOVED COMPLETELY -->
-    <section class="hero" id="home">
-      <div class="container">
-        <div class="hero-inner">
-          <div class="eyebrow">
-            <span class="green-dot"></span>
-            DevOps · Cloud · Automation
-          </div>
-
-          <h1>
-            Hi, I'm Lakshmi<br>
-            <span class="gradient-text">Kumari.</span>
-          </h1>
-
-          <p class="hero-description">
-            Computer Science graduate exploring DevOps, cloud infrastructure,
-            automation, and CI/CD. I'm learning how applications move from code
-            to deployment and how systems can run more reliably.
-          </p>
-
-          <div class="buttons">
-            <a class="btn btn-primary" href="#projects">
-              ◫ Explore projects
-            </a>
-            <a class="btn" href="#contact">➤ Contact me</a>
-            <a class="btn" href="https://github.com/lakshmikumari-123"
-              target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          </div>
-        </div>
-
-        <!-- Interactive simulated terminal -->
-        <div class="terminal" id="terminal">
-          <div class="terminal-head">
-            <div class="terminal-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <span class="terminal-title">lakshmi@portfolio:~</span>
-            <span>›_</span>
-          </div>
-
-          <div class="terminal-body">
-            <div class="terminal-output" id="terminalOutput"><span class="prompt">$ help</span>
-Try: about, skills, projects, github, clear</div>
-
-            <form class="terminal-form" id="terminalForm">
-              <input id="terminalInput" type="text"
-                placeholder="Type a command..."
-                aria-label="Terminal command" autocomplete="off">
-              <button type="submit">Run</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT: SMALL PHOTO ONLY HERE -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-heading">
-          <p class="kicker">Get to know me</p>
-          <h2>About <span class="gradient-text">Me</span></h2>
-          <p>A little about my journey into DevOps and cloud technology.</p>
-        </div>
-
-        <div class="about-grid">
-          <div class="about-photo-wrap">
-            <div class="about-photo-frame">
-              <img
-                class="about-photo"
-                src="profile.jpg"
-                alt="Lakshmi Kumari"
-                onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='assets/profile.jpg';}"
-              >
-            </div>
-            <p class="photo-caption">DevOps & Cloud Learner</p>
-          </div>
-
-          <div class="about-copy">
-            <h3>
-              Learning, building, and improving
-              <span class="accent">every day.</span>
-            </h3>
-
-            <p>
-              I'm a Computer Science graduate interested in automation,
-              cloud infrastructure, and reliable software delivery.
-            </p>
-
-            <p>
-              I'm developing my skills through hands-on learning with Linux,
-              Git, Docker, GitHub Actions, and AWS. I enjoy understanding how
-              applications are built, tested, deployed, and maintained.
-            </p>
-
-            <div class="about-details">
-              <div class="detail-card">
-                <strong>EDUCATION</strong>
-                <span>B.Tech in Computer Science</span>
-              </div>
-
-              <div class="detail-card">
-                <strong>AREAS OF INTEREST</strong>
-                <span>DevOps and Cloud Computing</span>
-              </div>
-
-              <div class="detail-card">
-                <strong>TOOLS</strong>
-                <span>Linux, Git, Docker, AWS</span>
-              </div>
-
-              <div class="detail-card">
-                <strong>PROGRAMMING</strong>
-                <span>Java, SQL, REST APIs</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-heading">
-          <p class="kicker">My toolkit</p>
-          <h2>Skills & <span class="gradient-text">Technologies</span></h2>
-          <p>Technologies I am learning and practising in my projects.</p>
-        </div>
-
-        <div class="skills-grid">
-          <article class="skill-card">
-            <div class="skill-icon">⌘</div>
-            <h3>Linux</h3>
-            <p>Command-line basics, file permissions, processes, and logs.</p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-icon">⑂</div>
-            <h3>Git & GitHub</h3>
-            <p>Version control, repositories, commits, and collaboration.</p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-icon">▣</div>
-            <h3>Docker</h3>
-            <p>Containers, images, Dockerfiles, and application packaging.</p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-icon">⚙</div>
-            <h3>GitHub Actions</h3>
-            <p>Workflow configuration and automated build pipelines.</p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-icon">☁</div>
-            <h3>AWS</h3>
-            <p>Learning cloud services, IAM, storage, and networking.</p>
-          </article>
-
-          <article class="skill-card">
-            <div class="skill-icon">⌨</div>
-            <h3>Java & SQL</h3>
-            <p>Programming fundamentals, database queries, and REST API concepts.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-heading">
-          <p class="kicker">My work</p>
-          <h2>Featured <span class="gradient-text">Projects</span></h2>
-          <p>Portfolio work and learning projects related to DevOps.</p>
-        </div>
-
-        <div class="project-filters" aria-label="Filter projects">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="devops">DevOps</button>
-          <button class="filter-btn" data-filter="cloud">Cloud</button>
-          <button class="filter-btn" data-filter="web">Web</button>
-        </div>
-
-        <div class="projects-grid">
-          <article class="project-card" data-category="web devops">
-            <div class="project-meta">
-              <span class="project-number">PROJECT 01</span>
-              <span class="project-status">Portfolio</span>
-            </div>
-            <h3>DevOps Portfolio Website</h3>
-            <p>
-              A responsive portfolio website presenting my skills,
-              learning journey, and project work.
-            </p>
-            <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">GitHub Pages</span>
-            </div>
-            <a class="project-link"
-              href="https://github.com/lakshmikumari-123/my-frst-website"
-              target="_blank" rel="noopener noreferrer">
-              View repository ↗
-            </a>
-          </article>
-
-          <article class="project-card" data-category="devops">
-            <div class="project-meta">
-              <span class="project-number">PROJECT 02</span>
-              <span class="project-status">CI/CD</span>
-            </div>
-            <h3>Docker & GitHub Actions</h3>
-            <p>
-              Practice project using Docker and a GitHub Actions workflow
-              to automate building a container image.
-            </p>
-            <div class="tags">
-              <span class="tag">Docker</span>
-              <span class="tag">GitHub Actions</span>
-              <span class="tag">CI/CD</span>
-            </div>
-            <a class="project-link"
-              href="https://github.com/lakshmikumari-123/my-frst-website"
-              target="_blank" rel="noopener noreferrer">
-              View repository ↗
-            </a>
-          </article>
-
-          <article class="project-card" data-category="devops">
-            <div class="project-meta">
-              <span class="project-number">PROJECT 03</span>
-              <span class="project-status">Learning</span>
-            </div>
-            <h3>Linux Administration</h3>
-            <p>
-              Learning command-line operations, permissions, process
-              inspection, and basic troubleshooting.
-            </p>
-            <div class="tags">
-              <span class="tag">Linux</span>
-              <span class="tag">Commands</span>
-              <span class="tag">Troubleshooting</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-category="cloud">
-            <div class="project-meta">
-              <span class="project-number">PROJECT 04</span>
-              <span class="project-status">Learning</span>
-            </div>
-            <h3>AWS Cloud Fundamentals</h3>
-            <p>
-              Learning IAM permissions, S3 storage, cloud networking,
-              and infrastructure security fundamentals.
-            </p>
-            <div class="tags">
-              <span class="tag">AWS</span>
-              <span class="tag">IAM</span>
-              <span class="tag">S3</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-heading">
-          <p class="kicker">Get in touch</p>
-          <h2>Let's <span class="gradient-text">Connect</span></h2>
-          <p>Feel free to explore my work and connect with me.</p>
-        </div>
-
-        <div class="contact-box">
-          <div>
-            <h3>Have an opportunity or idea?</h3>
-            <p>
-              I'm interested in learning opportunities, DevOps projects,
-              and connecting with people in technology.
-            </p>
-          </div>
-
-          <div class="contact-actions">
-            <a class="btn btn-primary"
-              href="https://github.com/lakshmikumari-123"
-              target="_blank" rel="noopener noreferrer">
-              GitHub ↗
-            </a>
-            <a class="btn"
-              href="https://www.linkedin.com/"
-              target="_blank" rel="noopener noreferrer">
-              LinkedIn ↗
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Lakshmi Kumari. Built with care.</p>
-      <a href="#home">Back to top ↑</a>
+<header>
+  <nav class="container">
+    <a href="#home" class="logo">lakshmi<span>.dev</span></a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#terminal">Terminal</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-btn" id="themeToggle" aria-label="Toggle theme">☾</button>
+      <button class="nav-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
-  </footer>
+  </nav>
+</header>
 
-  <script>
-    // Mobile navigation
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+<main>
+  <!-- Home: no profile photo -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="pill"><span class="dot"></span> Available to learn and collaborate</div>
+      <h1>Hi, I'm Lakshmi<br><span class="gradient" id="typedName">Kumari.</span><span class="gradient" id="cursor">|</span></h1>
+      <p>
+        Computer Science graduate exploring DevOps, cloud infrastructure,
+        automation, and CI/CD. I'm learning how applications move from code
+        to deployment and how systems can run more reliably.
+      </p>
+      <div class="buttons">
+        <a class="btn primary" href="#projects">↗ Explore projects</a>
+        <a class="btn" href="#contact">✉ Contact me</a>
+        <a class="btn" href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
 
-    menuToggle.addEventListener("click", () => {
-      const opened = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(opened));
-      menuToggle.textContent = opened ? "✕" : "☰";
-    });
+      <div class="terminal" id="terminal">
+        <div class="terminal-head">
+          <div class="terminal-dots"><i></i><i></i><i></i></div>
+          <span class="terminal-title">lakshmi@portfolio:~</span>
+          <span>›_</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-output" id="terminalOutput"><b>$ help</b>
+Try: about, skills, projects, github, contact, clear</div>
+          <form class="terminal-form" id="terminalForm">
+            <input id="terminalInput" placeholder="Type a command..." aria-label="Terminal command" autocomplete="off">
+            <button type="submit">Run</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
-      });
-    });
+  <!-- Photo appears only in About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="kicker">Get to know me</p>
+        <h2 class="section-title">About <span class="gradient">Me</span></h2>
+        <p class="section-intro">A little about my journey into DevOps and cloud technology.</p>
+      </div>
+      <div class="about-grid">
+        <div class="photo-wrap reveal">
+          <div class="photo-frame">
+            <img class="profile-photo" src="profile.jpg" alt="Lakshmi Kumari"
+              onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='assets/profile.jpg';}">
+          </div>
+          <p class="photo-caption">DevOps & Cloud Learner</p>
+        </div>
+        <div class="about-copy reveal">
+          <h3>Learning, building, and improving <span class="gradient">every day.</span></h3>
+          <p>I'm a Computer Science graduate interested in automation, cloud infrastructure, and reliable software delivery.</p>
+          <p>I'm developing my skills through hands-on learning with Linux, Git, Docker, GitHub Actions, and AWS. I enjoy understanding how applications are built, tested, deployed, and maintained.</p>
+          <div class="details">
+            <div class="detail"><strong>EDUCATION</strong><span>B.Tech in Computer Science</span></div>
+            <div class="detail"><strong>INTERESTS</strong><span>DevOps and Cloud Computing</span></div>
+            <div class="detail"><strong>TOOLS</strong><span>Linux, Git, Docker, AWS</span></div>
+            <div class="detail"><strong>PROGRAMMING</strong><span>Java, SQL, REST APIs</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Light/dark theme toggle
-    const themeToggle = document.getElementById("themeToggle");
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="kicker">My toolkit</p>
+        <h2 class="section-title">Skills & <span class="gradient">Technologies</span></h2>
+        <p class="section-intro">Technologies I am learning and practising in my projects.</p>
+      </div>
+      <div class="skills-grid">
+        <article class="skill-card reveal"><div class="skill-icon">⌘</div><h3>Linux</h3><p>Commands, permissions, processes and logs.</p><div class="skill-level"><span style="--level:65%"></span></div></article>
+        <article class="skill-card reveal"><div class="skill-icon">⑂</div><h3>Git & GitHub</h3><p>Version control, repositories and commits.</p><div class="skill-level"><span style="--level:75%"></span></div></article>
+        <article class="skill-card reveal"><div class="skill-icon">▣</div><h3>Docker</h3><p>Images, containers and Dockerfiles.</p><div class="skill-level"><span style="--level:60%"></span></div></article>
+        <article class="skill-card reveal"><div class="skill-icon">⚙</div><h3>GitHub Actions</h3><p>Workflows and automated build pipelines.</p><div class="skill-level"><span style="--level:60%"></span></div></article>
+        <article class="skill-card reveal"><div class="skill-icon">☁</div><h3>AWS</h3><p>Cloud services, IAM, storage and networking.</p><div class="skill-level"><span style="--level:50%"></span></div></article>
+        <article class="skill-card reveal"><div class="skill-icon">⌨</div><h3>Java & SQL</h3><p>Programming, queries and REST API concepts.</p><div class="skill-level"><span style="--level:70%"></span></div></article>
+      </div>
+      <p class="muted" style="font-size:11px;margin-top:15px">Skill bars are personal learning estimates, not formal test scores.</p>
+    </div>
+  </section>
 
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("light");
-      const light = document.body.classList.contains("light");
-      themeToggle.textContent = light ? "☀" : "☾";
-      themeToggle.setAttribute(
-        "aria-label",
-        light ? "Switch to dark theme" : "Switch to light theme"
-      );
-    });
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="kicker">My work</p>
+        <h2 class="section-title">Featured <span class="gradient">Projects</span></h2>
+        <p class="section-intro">Portfolio work and learning projects related to DevOps.</p>
+      </div>
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">All projects</button>
+        <button class="filter-btn" data-filter="devops">DevOps</button>
+        <button class="filter-btn" data-filter="cloud">Cloud</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card reveal" data-category="web devops">
+          <div class="project-meta"><span class="project-number">PROJECT 01</span><span class="project-status">Portfolio</span></div>
+          <h3>DevOps Portfolio Website</h3>
+          <p>A responsive portfolio presenting my skills, learning journey, and project work.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span></div>
+          <a class="project-link" href="https://github.com/lakshmikumari-123/my-frst-website" target="_blank" rel="noopener noreferrer">View repository ↗</a>
+        </article>
+        <article class="project-card reveal" data-category="devops">
+          <div class="project-meta"><span class="project-number">PROJECT 02</span><span class="project-status">CI/CD practice</span></div>
+          <h3>Docker & GitHub Actions</h3>
+          <p>Practice project using Docker and a GitHub Actions workflow to automate image builds.</p>
+          <div class="tags"><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span></div>
+          <a class="project-link" href="https://github.com/lakshmikumari-123/my-frst-website" target="_blank" rel="noopener noreferrer">View repository ↗</a>
+        </article>
+        <article class="project-card reveal" data-category="devops">
+          <div class="project-meta"><span class="project-number">PROJECT 03</span><span class="project-status">Learning</span></div>
+          <h3>Linux Administration</h3>
+          <p>Practising command-line operations, permissions, process inspection, and troubleshooting.</p>
+          <div class="tags"><span class="tag">Linux</span><span class="tag">Commands</span><span class="tag">Logs</span></div>
+        </article>
+        <article class="project-card reveal" data-category="cloud">
+          <div class="project-meta"><span class="project-number">PROJECT 04</span><span class="project-status">Learning</span></div>
+          <h3>AWS Cloud Fundamentals</h3>
+          <p>Learning IAM permissions, S3 storage, cloud networking, and infrastructure security.</p>
+          <div class="tags"><span class="tag">AWS</span><span class="tag">IAM</span><span class="tag">S3</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    // Interactive simulated terminal: safe, predefined commands only
-    const terminalForm = document.getElementById("terminalForm");
-    const terminalInput = document.getElementById("terminalInput");
-    const terminalOutput = document.getElementById("terminalOutput");
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="kicker">Get in touch</p>
+        <h2 class="section-title">Let's <span class="gradient">Connect</span></h2>
+        <p class="section-intro">Explore my work or connect with me online.</p>
+      </div>
+      <div class="contact-box reveal">
+        <div><h3>Have an opportunity or idea?</h3><p>I'm interested in learning opportunities, DevOps projects, and connecting with people in technology.</p></div>
+        <div class="contact-actions">
+          <a class="btn primary" href="https://github.com/lakshmikumari-123" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <button class="btn" id="copyGitHub" type="button">Copy GitHub link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
-    const commands = {
-      help: "Available commands: about, skills, projects, github, clear",
-      about: "I'm Lakshmi Kumari, a Computer Science graduate exploring DevOps and cloud technologies.",
-      skills: "Learning areas: Linux, Git, Docker, GitHub Actions, AWS, Java, SQL.",
-      projects: "Explore the Projects section to see my portfolio and learning projects.",
-      github: "Open: https://github.com/lakshmikumari-123",
-      clear: ""
-    };
+<footer>
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> Lakshmi Kumari · Built with care.</p>
+    <a href="#home">Back to top ↑</a>
+  </div>
+</footer>
 
-    terminalForm.addEventListener("submit", event => {
-      event.preventDefault();
-      const command = terminalInput.value.trim().toLowerCase();
+<button id="backTop" aria-label="Back to top">↑</button>
+<div id="toast" role="status" aria-live="polite"></div>
 
-      if (!command) return;
+<script>
+const $ = selector => document.querySelector(selector);
+const $$ = selector => [...document.querySelectorAll(selector)];
 
-      if (command === "clear") {
-        terminalOutput.textContent = "";
-        terminalInput.value = "";
-        return;
-      }
+// Mobile navigation
+const navLinks = $("#navLinks");
+$("#menuToggle").addEventListener("click", () => {
+  const opened = navLinks.classList.toggle("open");
+  $("#menuToggle").setAttribute("aria-expanded", String(opened));
+  $("#menuToggle").textContent = opened ? "✕" : "☰";
+});
+$$(".nav-links a").forEach(link => link.addEventListener("click", () => {
+  navLinks.classList.remove("open");
+  $("#menuToggle").textContent = "☰";
+  $("#menuToggle").setAttribute("aria-expanded", "false");
+}));
 
-      const result = commands[command] ||
-        "Command not found. Type 'help' to see available commands.";
+// Interactive dark/light theme
+$("#themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  const light = document.body.classList.contains("light");
+  $("#themeToggle").textContent = light ? "☀" : "☾";
+  $("#themeToggle").setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+});
 
-      terminalOutput.textContent = "$ " + command + "\n" + result;
-      terminalInput.value = "";
-    });
-
-    // Project category filters
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const projectCards = document.querySelectorAll(".project-card");
-
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        filterButtons.forEach(item => item.classList.remove("active"));
-        button.classList.add("active");
-
-        const filter = button.dataset.filter;
-
-        projectCards.forEach(card => {
-          const categories = card.dataset.category.split(" ");
-          card.hidden = filter !== "all" && !categories.includes(filter);
-        });
-      });
-    });
-
-    // Highlight the current navigation section
-    const sections = document.querySelectorAll("main section[id]");
-    const navItems = document.querySelectorAll(".nav-links a");
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navItems.forEach(link => {
-              link.classList.toggle(
-                "active",
-                link.getAttribute("href") === "#" + entry.target.id
-              );
-            });
-          }
-        });
-      }, { rootMargin: "-25% 0px -60% 0px" });
-
-      sections.forEach(section => observer.observe(section));
+// Typing animation
+const typedName = $("#typedName");
+const words = ["Kumari.", "DevOps Learner.", "Cloud Explorer."];
+let wordIndex = 0, charIndex = words[0].length, deleting = false;
+function typeEffect() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const word = words[wordIndex];
+  if (!deleting) {
+    charIndex++;
+    typedName.textContent = word.slice(0, charIndex);
+    if (charIndex >= word.length) {
+      deleting = true;
+      setTimeout(typeEffect, 1300);
+      return;
     }
+  } else {
+    charIndex--;
+    typedName.textContent = word.slice(0, charIndex);
+    if (charIndex <= 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+    }
+  }
+  setTimeout(typeEffect, deleting ? 65 : 100);
+}
+setTimeout(typeEffect, 1800);
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+// Reveal sections and animate skill bars as they enter view
+const revealElements = $$(".reveal");
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.12});
+  revealElements.forEach(el => revealObserver.observe(el));
+} else {
+  revealElements.forEach(el => el.classList.add("visible"));
+}
+
+// Interactive portfolio terminal; commands are simulated, not shell execution
+const terminalCommands = {
+  help: "Commands: help, about, skills, projects, github, contact, clear",
+  about: "Lakshmi Kumari — Computer Science graduate exploring DevOps and cloud.",
+  skills: "Linux | Git | Docker | GitHub Actions | AWS | Java | SQL",
+  projects: "Scroll to Projects to explore my portfolio and learning projects.",
+  github: "https://github.com/lakshmikumari-123",
+  contact: "Use the Contact section to connect with me online."
+};
+$("#terminalForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const input = $("#terminalInput");
+  const command = input.value.trim().toLowerCase();
+  if (!command) return;
+  if (command === "clear") {
+    $("#terminalOutput").textContent = "";
+    input.value = "";
+    return;
+  }
+  const answer = terminalCommands[command] || "Unknown command. Type help to see the available commands.";
+  $("#terminalOutput").textContent = "$ " + command + "\n" + answer;
+  input.value = "";
+});
+
+// Project category filters
+$$(".filter-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    $$(".filter-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    const category = button.dataset.filter;
+    $$(".project-card").forEach(card => {
+      card.hidden = category !== "all" && !card.dataset.category.split(" ").includes(category);
+    });
+  });
+});
+
+// Active navigation state
+if ("IntersectionObserver" in window) {
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        $$(".nav-links a").forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin:"-25% 0px -65% 0px"});
+  $$("main section[id]").forEach(section => sectionObserver.observe(section));
+}
+
+// Back-to-top button
+const backTop = $("#backTop");
+window.addEventListener("scroll", () => {
+  backTop.classList.toggle("show", window.scrollY > 400);
+}, {passive:true});
+backTop.addEventListener("click", () => window.scrollTo({top:0,behavior:"smooth"}));
+
+// Small feedback message
+let toastTimer;
+function toast(message) {
+  const el = $("#toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+// Copy GitHub URL
+$("#copyGitHub").addEventListener("click", async () => {
+  const url = "https://github.com/lakshmikumari-123";
+  try {
+    await navigator.clipboard.writeText(url);
+    toast("GitHub link copied!");
+  } catch {
+    toast("GitHub: " + url);
+  }
+});
+
+$("#year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
